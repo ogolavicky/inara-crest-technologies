@@ -4,26 +4,23 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const inter = Inter({
+const inter = Inter({ 
   subsets: ["latin"],
-  display: "swap",
+  weight: ['400', '500', '600', '700'],
+  display: 'swap' 
 });
 
 export const metadata: Metadata = {
-  title: "Inara Crest Technologies",
-  description: "Your trusted partner for ISP solutions, domain registration, email services, website hosting, and more.",
+  title: "Inara Crest Technologies | East Africa",
+  description: "Enterprise technology and infrastructure solutions.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased selection:bg-blue-600 selection:text-white`}>
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

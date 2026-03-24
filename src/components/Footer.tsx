@@ -1,96 +1,108 @@
 import Link from "next/link";
+import { Phone, Mail, MapPin, ShieldCheck, Headphones, Globe } from "lucide-react";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-gray-950 text-gray-400">
-      <div className="container mx-auto px-6 pt-16 pb-8">
-        <div className="grid md:grid-cols-4 gap-10">
-          {/* Company Info */}
-          <div>
-            <div className="text-white text-2xl font-bold mb-4">Inara Crest</div>
-            <p className="text-sm leading-relaxed">
-              A 100% Kenyan-owned technology and infrastructure solutions company delivering reliable, scalable, and integrated systems.
+    <footer className="bg-gray-950 text-gray-400 border-t border-gray-900">
+      <div className="container mx-auto px-8 pt-24 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          
+          {/* Company info */}
+          <div className="space-y-6">
+            <div className="text-white text-xl font-bold tracking-tight">
+              Inara <span className="text-blue-500">Crest</span>
+            </div>
+            <p className="text-sm leading-relaxed font-medium">
+              A 100% East African-owned technology and infrastructure solutions company delivering reliable, scalable, and integrated systems.
             </p>
-            <div className="mt-6 text-xs">
-              <p>P.O. Box 103876 – 00101, Nairobi, Kenya</p>
-              <p>Darosa Plaza, First Floor, Karen Road</p>
+            <div className="space-y-3 text-xs font-medium">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-blue-500 shrink-0" />
+                <p>Darosa Plaza, First Floor, Karen Road<br />P.O. Box 103876 – 00101, Nairobi, East Africa</p>
+              </div>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick links */}
           <div>
-            <h3 className="text-white font-semibold mb-5">Quick Links</h3>
-            <div className="space-y-3 text-sm">
-              <Link href="/" className="block hover:text-white transition">Home</Link>
-              <Link href="/solutions" className="block hover:text-white transition">Our Solutions</Link>
-              <Link href="/hosting" className="block hover:text-white transition">Web Hosting</Link>
-              <Link href="/internet" className="block hover:text-white transition">Internet Services</Link>
-              <Link href="/why-us" className="block hover:text-white transition">Why Inara Crest</Link>
-              <Link href="/support" className="block hover:text-white transition">Support</Link>
+            <h3 className="text-white font-bold text-sm mb-6 uppercase tracking-widest">Quick links</h3>
+            <div className="flex flex-col space-y-4 text-sm font-medium">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <Link href="/solutions/cloud-and-internet" className="hover:text-white transition-colors">Our solutions</Link>
+              <Link href="/solutions/cloud-and-internet" className="hover:text-white transition-colors">Web hosting</Link>
+              <Link href="/why-us" className="hover:text-white transition-colors">Why Inara Crest</Link>
+              <Link href="/support" className="hover:text-white transition-colors">Support</Link>
             </div>
           </div>
 
-          {/* Services */}
+          {/* Our services */}
           <div>
-            <h3 className="text-white font-semibold mb-5">Our Services</h3>
-            <div className="space-y-3 text-sm">
-              <p>Software Development</p>
-              <p>IT Infrastructure &amp; Networking</p>
-              <p>Security &amp; Surveillance</p>
-              <p>Power Backup &amp; Energy</p>
-              <p>HVAC &amp; Smart Buildings</p>
-              <p>Managed IT Services</p>
-            </div>
+            <h3 className="text-white font-bold text-sm mb-6 uppercase tracking-widest">Our services</h3>
+            <ul className="flex flex-col space-y-4 text-sm font-medium">
+              <li className="flex items-center gap-2">Software development</li>
+              <li className="flex items-center gap-2">It infrastructure and networking</li>
+              <li className="flex items-center gap-2">Security and surveillance</li>
+              <li className="flex items-center gap-2">Power backup and energy</li>
+              <li className="flex items-center gap-2">Hvac and smart buildings</li>
+              <li className="flex items-center gap-2">Managed it services</li>
+            </ul>
           </div>
 
-          {/* Contact &amp; Legal */}
+          {/* Get in touch */}
           <div>
-            <h3 className="text-white font-semibold mb-5">Get In Touch</h3>
-            
-            <div className="space-y-4 text-sm">
-              <div>
-                <p className="font-medium text-white">Phone</p>
-                <a href="tel:+254798856450" className="hover:text-white">+254 798 856 450</a><br />
-                <a href="tel:+25472096680" className="hover:text-white">+254 720 966 680</a><br />
-                <a href="tel:+254741177665" className="hover:text-white">+254 741 177 665</a>
+            <h3 className="text-white font-bold text-sm mb-6 uppercase tracking-widest">Get in touch</h3>
+            <div className="space-y-6 text-sm font-medium">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-blue-500" />
+                  <div className="flex flex-col">
+                    <a href="tel:+254798856450" className="hover:text-white">+254 798 856 450</a>
+                    <a href="tel:+25472096680" className="hover:text-white">+254 720 966 680</a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail className="w-4 h-4 text-blue-500" />
+                  <a href="mailto:info@inaracresttechnologies.com" className="hover:text-white break-all">
+                    info@inaracresttechnologies.com
+                  </a>
+                </div>
               </div>
 
-              <div>
-                <p className="font-medium text-white">Email</p>
-                <a href="mailto:info@inaracresttechnologies.com" className="hover:text-white">
-                  info@inaracresttechnologies.com
-                </a>
+              {/* Trust signals */}
+              <div className="pt-6 border-t border-gray-900 space-y-3">
+                <div className="flex items-center gap-3 text-xs">
+                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                  <span>99.9% Uptime guarantee</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs">
+                  <Headphones className="w-4 h-4 text-emerald-500" />
+                  <span>24/7 Expert support</span>
+                </div>
+                <div className="flex items-center gap-3 text-xs">
+                  <Globe className="w-4 h-4 text-emerald-500" />
+                  <span>East African owned</span>
+                </div>
               </div>
-
-              <div>
-                <p className="font-medium text-white">Working Hours</p>
-                <p>Monday – Friday: 8:00 AM – 5:00 PM</p>
-              </div>
-            </div>
-
-            {/* Trust Signals */}
-            <div className="mt-8 pt-6 border-t border-gray-800 text-xs space-y-2">
-              <div className="flex items-center gap-2">
-                <span className="text-emerald-500">●</span>
-                99.9% Uptime Guarantee
-              </div>
-              <div>24/7 Expert Support</div>
-              <div>100% Kenyan Owned &amp; Operated</div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-gray-800 text-xs flex flex-col md:flex-row justify-between items-center gap-4">
-          <p>© {new Date().getFullYear()} Inara Crest Technologies Limited. All Rights Reserved.</p>
+        {/* Bottom bar */}
+        <div className="mt-20 pt-8 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-xs font-medium">
+            © {currentYear} Inara Crest Technologies Limited. All rights reserved.
+          </p>
           
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-white transition">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white transition">Terms of Service</Link>
+          <div className="flex gap-8 text-xs font-medium">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy policy</Link>
+            <Link href="/terms" className="hover:text-white transition-colors">Terms of service</Link>
           </div>
 
-          <div className="text-center md:text-right">
-            Serving Kenya from Nairobi &amp; Kisumu
+          <div className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            Systems operational
           </div>
         </div>
       </div>
