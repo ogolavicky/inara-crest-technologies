@@ -21,7 +21,6 @@ export default function SoftwareSolutionsPage() {
             className="w-full h-full object-cover opacity-100" 
             alt="Software engineering and development" 
           />
-          {/* Transparent gradient to keep image sharp while making text readable */}
           <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/40 to-transparent dark:from-black/95 dark:via-black/40 dark:to-transparent"></div>
         </div>
         <div className="relative z-10 max-w-4xl px-8">
@@ -47,31 +46,43 @@ export default function SoftwareSolutionsPage() {
                   We design, develop, and maintain scalable, secure, and customized software solutions tailored to modern business needs. Our solutions help automate and grow your operations through technical excellence and practical strategy.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6">
-                  <div className="space-y-2">
-                    <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 rounded-lg">
+                  {/* Interactive Approach Items */}
+                  <Link 
+                    href={{ pathname: '/support', query: { plan: "Application development", details: "Mobile, web, and cloud-based applications built for scale." } }}
+                    className="group space-y-2 hover:translate-y-[-2px] transition-transform"
+                  >
+                    <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
                       <Smartphone className="w-5 h-5" />
                     </div>
-                    <h4 className="font-bold text-sm">Application development</h4>
+                    <h4 className="font-bold text-sm group-hover:text-blue-600 transition-colors">Application development</h4>
                     <p className="text-xs text-gray-500">Mobile, web, and cloud-based applications built for scale.</p>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 rounded-lg">
+                  </Link>
+                  <Link 
+                    href={{ pathname: '/support', query: { plan: "System lifecycle", details: "Ongoing technical support, software upgrades, and maintenance." } }}
+                    className="group space-y-2 hover:translate-y-[-2px] transition-transform"
+                  >
+                    <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
                       <Cog className="w-5 h-5" />
                     </div>
-                    <h4 className="font-bold text-sm">System lifecycle</h4>
+                    <h4 className="font-bold text-sm group-hover:text-blue-600 transition-colors">System lifecycle</h4>
                     <p className="text-xs text-gray-500">Ongoing technical support, software upgrades, and maintenance.</p>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
+            
             <div className="bg-gray-50 dark:bg-[#0A0A0A] p-10 rounded-2xl border border-gray-100 dark:border-gray-900">
                <h3 className="text-xl font-bold mb-8">Specialized vertical solutions</h3>
                <div className="space-y-8">
                   {specializedSystems.map((item) => (
-                    <div key={item.title} className="group border-l-2 border-gray-200 dark:border-gray-800 pl-6 hover:border-blue-600 transition-all">
-                      <h4 className="text-blue-600 font-bold text-sm mb-1">{item.title}</h4>
+                    <Link 
+                      key={item.title} 
+                      href={{ pathname: '/support', query: { plan: item.title, details: item.desc } }}
+                      className="block group border-l-2 border-gray-200 dark:border-gray-800 pl-6 hover:border-blue-600 transition-all"
+                    >
+                      <h4 className="text-blue-600 font-bold text-sm mb-1 group-hover:translate-x-1 transition-transform">{item.title}</h4>
                       <p className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
-                    </div>
+                    </Link>
                   ))}
                </div>
             </div>
@@ -137,10 +148,13 @@ export default function SoftwareSolutionsPage() {
 
 function FeatureBlock({ icon, title, desc }: any) {
   return (
-    <div className="p-8 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm hover:border-blue-600 transition-all duration-300">
+    <Link 
+      href={{ pathname: '/support', query: { plan: title, details: desc } }}
+      className="block p-8 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm hover:border-blue-600 hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+    >
       <div className="text-blue-600 mb-6">{icon}</div>
       <h4 className="font-bold text-lg mb-3">{title}</h4>
       <p className="text-sm text-gray-500 dark:text-gray-400 font-medium leading-relaxed">{desc}</p>
-    </div>
+    </Link>
   );
 }

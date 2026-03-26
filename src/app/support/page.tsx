@@ -1,11 +1,50 @@
 "use client";
 
+import React, { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Phone, Mail, MapPin, MessageSquare, Send, Clock, Globe } from "lucide-react";
 
-export default function SupportPage() {
+function SupportContent() {
+  const searchParams = useSearchParams();
+  const planName = searchParams.get("plan");
+  const planDetails = searchParams.get("details");
+
+  // State to manage form inputs
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "", 
+    email: "",
+    message: ""
+  });
+
+  // Automatically fill the message if a plan was selected from the Cloud page
+  useEffect(() => {
+    if (planName) {
+      setFormData((prev) => ({
+        ...prev,
+        message: `I am interested in the ${planName} package.\nDetails: ${planDetails || "N/A"}\n\nPlease provide more information regarding deployment and setup.`
+      }));
+    }
+  }, [planName, planDetails]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Inquiry: ${planName || "General Support"}`);
+    const body = encodeURIComponent(
+      `Selected Plan: ${planName || "None"}\n` +
+      `Plan Details: ${planDetails || "N/A"}\n\n` +
+      `Client Name: ${formData.name}\n` +
+      `Phone Number: ${formData.phone}\n` +
+      `Email: ${formData.email}\n\n` +
+      `Message:\n${formData.message}`
+    );
+    
+    window.location.href = `mailto:info@inaracresttechnologies.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
-      {/* --- Hero Section (Sharp Image) --- */}
+      {/* --- Hero Section --- */}
       <section className="relative h-[45vh] flex items-center overflow-hidden border-b border-gray-100 dark:border-gray-900">
         <div className="absolute inset-0 z-0">
           <img 
@@ -23,12 +62,12 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* --- Contacts and Chat --- */}
+      {/* --- Contacts and Message Section --- */}
       <section className="py-24">
         <div className="container mx-auto px-8">
           <div className="grid lg:grid-cols-3 gap-16">
             
-            {/* Contact Information */}
+            {/* RESTORED: Contact Information Column */}
             <div className="lg:col-span-1 space-y-10">
               <ContactBlock icon={<Phone />} title="Phone support" lines={["+254 798 856 450", "+254 720 966 680", "+254 741 177 665"]} />
               <ContactBlock icon={<Mail />} title="Email inquiry" lines={["info@inaracresttechnologies.com"]} />
@@ -36,39 +75,99 @@ export default function SupportPage() {
               <ContactBlock icon={<Clock />} title="Business hours" lines={["Monday – Friday: 8:00 am – 5:00 pm"]} />
             </div>
 
-            {/* Chat Interface */}
-            <div className="lg:col-span-2 bg-gray-50 dark:bg-[#0A0A0A] rounded-3xl border border-gray-100 dark:border-gray-900 overflow-hidden flex flex-col h-[600px] shadow-xl">
+            {/* Email Message Interface */}
+            <form onSubmit={handleSubmit} className="lg:col-span-2 bg-gray-50 dark:bg-[#0A0A0A] rounded-3xl border border-gray-100 dark:border-gray-900 overflow-hidden flex flex-col h-[700px] shadow-xl">
               <div className="p-6 bg-blue-600 text-white flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <MessageSquare className="w-5 h-5" />
-                  <span className="font-bold">Live assistance</span>
+                  <Mail className="w-5 h-5" />
+                  <span className="font-bold">Send us a message</span>
                 </div>
-                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] opacity-80">
-                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                  Agents online
-                </div>
+                {/* Live Session Button */}
+                <a 
+                  href="https://your-platform-link.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-white/20 hover:bg-white/30 transition-colors px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  Live Session
+                </a>
               </div>
+
               <div className="flex-grow p-10 bg-white dark:bg-black overflow-y-auto">
-                <div className="bg-gray-100 dark:bg-blue-900/20 p-6 rounded-2xl rounded-tl-none max-w-[85%] text-sm font-medium leading-relaxed">
-                  Welcome to Inara Crest. How can our technical team assist you today?
+                <div className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase tracking-widest opacity-60">Full Name</label>
+                      <input 
+                        type="text" required
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold uppercase tracking-widest opacity-60">Phone Number</label>
+                      <input 
+                        type="tel" required
+                        placeholder="+254 7..."
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest opacity-60">Email Address</label>
+                    <input 
+                      type="email" required
+                      placeholder="john@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold uppercase tracking-widest opacity-60">Your Inquiry</label>
+                    <textarea 
+                      required
+                      placeholder="How can our technical team assist you today?"
+                      rows={6}
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-4 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all resize-none"
+                    ></textarea>
+                  </div>
                 </div>
               </div>
-              <div className="p-6 bg-gray-50 dark:bg-[#0A0A0A] border-t border-gray-100 dark:border-gray-900 flex gap-4">
-                <input 
-                  type="text" 
-                  placeholder="Type your inquiry..."
-                  className="flex-grow bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl px-5 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all"
-                />
-                <button className="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center hover:bg-blue-700 transition-all shadow-md">
+
+              <div className="p-6 bg-gray-50 dark:bg-[#0A0A0A] border-t border-gray-100 dark:border-gray-900 flex justify-end">
+                <button 
+                  type="submit"
+                  className="flex items-center gap-3 px-8 h-12 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-md"
+                >
+                  <span>Send Message</span>
                   <Send className="w-5 h-5" />
                 </button>
               </div>
-            </div>
+            </form>
 
           </div>
         </div>
       </section>
     </main>
+  );
+}
+
+// Wrap in Suspense for Next.js useSearchParams
+export default function SupportPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white dark:bg-black" />}>
+      <SupportContent />
+    </Suspense>
   );
 }
 

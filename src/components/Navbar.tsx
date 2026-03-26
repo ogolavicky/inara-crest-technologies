@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { 
-  Search, 
-  ShoppingCart, 
   User, 
   ChevronDown, 
   Sun, 
@@ -113,10 +111,8 @@ export default function Navbar() {
         {/* Right Side - Icons & Actions */}
         <div className="flex items-center gap-2 sm:gap-4">
           
-          {/* Search, Cart, Login - Hidden on tiny screens, shown on small+ */}
+          {/* Icons - Search and Cart removed */}
           <div className="hidden sm:flex items-center gap-1">
-            <IconButton href="/search" icon={<Search className="w-4 h-4" />} label="Search" />
-            <IconButton href="/cart" icon={<ShoppingCart className="w-4 h-4" />} label="Cart" />
             <IconButton href="/login" icon={<User className="w-4 h-4" />} label="Login" />
           </div>
 
@@ -161,9 +157,7 @@ export default function Navbar() {
           <Link href="/why-us" className="text-sm font-medium" onClick={() => setIsMobileMenuOpen(false)}>Why us</Link>
           <Link href="/support" className="text-sm font-medium" onClick={() => setIsMobileMenuOpen(false)}>Support</Link>
           <hr className="dark:border-gray-800" />
-          <div className="flex justify-between items-center px-2">
-            <Link href="/search" className="text-gray-500" onClick={() => setIsMobileMenuOpen(false)}><Search className="w-5 h-5" /></Link>
-            <Link href="/cart" className="text-gray-500" onClick={() => setIsMobileMenuOpen(false)}><ShoppingCart className="w-5 h-5" /></Link>
+          <div className="flex justify-center items-center px-2">
             <Link href="/login" className="text-gray-500" onClick={() => setIsMobileMenuOpen(false)}><User className="w-5 h-5" /></Link>
           </div>
         </div>
