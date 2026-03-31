@@ -4,13 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
   Code2, Laptop, Database, Smartphone, ShieldCheck, 
-  Cog, ArrowRight, CheckCircle2, Layers 
+  Cog, ArrowRight, CheckCircle2, Layers, Users, Briefcase, Award
 } from "lucide-react";
 
 export default function LandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // 1. Updated Carousel Data with more inclusive internet wording
   const slides = [
     {
       image: "/software-dev.jpg",
@@ -38,6 +37,14 @@ export default function LandingPage() {
     { title: "Custom erp and enterprise software", desc: "Enterprise resource planning software to automate and grow internal business operations." },
   ];
 
+  const partners = [
+    { name: "AFVIS", logo: "/partner-afvis.png" },
+    { name: "Alliance Ginneries", logo: "/partner-alliance.png" },
+    { name: "Blast Entertainment", logo: "/partner-blast.png" },
+    { name: "InaraCrest", logo: "/partner-consultants.png" }, 
+    { name: "Meru", logo: "/partner-meru.png" },
+  ];
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -48,7 +55,7 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
       
-      {/* --- Hero Section with Dynamic Images & Broadened Text --- */}
+      {/* --- Hero Section --- */}
       <section className="relative h-[75vh] flex items-center overflow-hidden border-b border-gray-100 dark:border-gray-900">
         <div className="absolute inset-0 z-0">
           {slides.map((slide, index) => (
@@ -87,7 +94,26 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- Our Approach Section (Content Retained) --- */}
+      {/* --- Partners Logo Section --- */}
+      <section className="py-16 border-b border-gray-100 dark:border-gray-900 bg-gray-50/30 dark:bg-white/5">
+        <div className="container mx-auto px-8">
+          <p className="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-10">
+            Strategic Partners & Trusted Clients
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
+            {partners.map((partner) => (
+              <img 
+                key={partner.name} 
+                src={partner.logo} 
+                alt={partner.name} 
+                className="h-10 md:h-14 max-w-[180px] w-auto object-contain transition-transform hover:scale-105 duration-300"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- Our Approach Section --- */}
       <section className="py-32">
         <div className="container mx-auto px-8">
           <div className="grid lg:grid-cols-2 gap-20 items-start">
@@ -134,7 +160,30 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- Service Detail Grid (Content Retained) --- */}
+      {/* --- Stats Section --- */}
+      <section className="py-24 bg-blue-600 text-white">
+        <div className="container mx-auto px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <div className="space-y-2">
+              <div className="flex justify-center mb-4"><Briefcase className="w-8 h-8 opacity-60" /></div>
+              <h3 className="text-5xl md:text-6xl font-extrabold tracking-tight">50+</h3>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] opacity-90">Completed Projects</p>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-center mb-4"><Users className="w-8 h-8 opacity-60" /></div>
+              <h3 className="text-5xl md:text-6xl font-extrabold tracking-tight">100+</h3>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] opacity-90">Happy Clients</p>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-center mb-4"><Award className="w-8 h-8 opacity-60" /></div>
+              <h3 className="text-5xl md:text-6xl font-extrabold tracking-tight">25+</h3>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] opacity-90">Tech Experts</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- Service Detail Grid --- */}
       <section className="py-32 bg-gray-50 dark:bg-[#050505] border-y border-gray-100 dark:border-gray-900">
         <div className="container mx-auto px-8">
           <div className="max-w-3xl mb-16">
