@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Phone, Mail, MapPin, ShieldCheck, Headphones, Globe } from "lucide-react";
 
@@ -11,15 +13,17 @@ export default function Footer() {
           
           {/* Company info */}
           <div className="space-y-6">
+            {/* Logo Text: Using Vibrant Cyan (#00D2FF) for 'Crest' */}
             <div className="text-white text-xl font-bold tracking-tight">
-              Inara <span className="text-blue-500">Crest</span>
+              Inara <span className="text-[#00D2FF]">Crest</span>
             </div>
             <p className="text-sm leading-relaxed font-medium">
               A 100% East African-owned technology and infrastructure solutions company delivering reliable, scalable, and integrated systems.
             </p>
             <div className="space-y-3 text-xs font-medium">
               <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-blue-500 shrink-0" />
+                {/* Icon: Medium Ocean Blue (#0C6898) */}
+                <MapPin className="w-4 h-4 text-[#0C6898] shrink-0" />
                 <p>Darosa Plaza, First Floor, Karen Road<br />P.O. Box 103876 – 00101, Nairobi, East Africa</p>
               </div>
             </div>
@@ -56,32 +60,34 @@ export default function Footer() {
             <div className="space-y-6 text-sm font-medium">
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <Phone className="w-4 h-4 text-blue-500" />
+                  {/* Icon: Medium Ocean Blue (#0C6898) */}
+                  <Phone className="w-4 h-4 text-[#0C6898]" />
                   <div className="flex flex-col">
                     <a href="tel:+254798856450" className="hover:text-white">+254 798 856 450</a>
                     <a href="tel:+25472096680" className="hover:text-white">+254 720 966 680</a>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-blue-500" />
+                  {/* Icon: Medium Ocean Blue (#0C6898) */}
+                  <Mail className="w-4 h-4 text-[#0C6898]" />
                   <a href="mailto:info@inaracresttechnologies.com" className="hover:text-white break-all">
                     info@inaracresttechnologies.com
                   </a>
                 </div>
               </div>
 
-              {/* Trust signals */}
+              {/* Trust signals - Using Vibrant Cyan (#00D2FF) */}
               <div className="pt-6 border-t border-gray-900 space-y-3">
                 <div className="flex items-center gap-3 text-xs">
-                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                  <ShieldCheck className="w-4 h-4 text-[#00D2FF]" />
                   <span>99.9% Uptime guarantee</span>
                 </div>
                 <div className="flex items-center gap-3 text-xs">
-                  <Headphones className="w-4 h-4 text-emerald-500" />
+                  <Headphones className="w-4 h-4 text-[#00D2FF]" />
                   <span>24/7 Expert support</span>
                 </div>
                 <div className="flex items-center gap-3 text-xs">
-                  <Globe className="w-4 h-4 text-emerald-500" />
+                  <Globe className="w-4 h-4 text-[#00D2FF]" />
                   <span>East African owned</span>
                 </div>
               </div>
@@ -101,7 +107,8 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-2 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            {/* Status dot: Vibrant Cyan (#00D2FF) */}
+            <span className="w-2 h-2 bg-[#00D2FF] rounded-full animate-pulse"></span>
             Systems operational
           </div>
         </div>

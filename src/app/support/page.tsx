@@ -43,7 +43,7 @@ function SupportContent() {
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
+    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors">
       {/* --- Hero Section --- */}
       <section className="relative h-[45vh] flex items-center overflow-hidden border-b border-gray-100 dark:border-gray-900">
         <div className="absolute inset-0 z-0">
@@ -67,7 +67,7 @@ function SupportContent() {
         <div className="container mx-auto px-8">
           <div className="grid lg:grid-cols-3 gap-16">
             
-            {/* RESTORED: Contact Information Column */}
+            {/* Contact Information Column */}
             <div className="lg:col-span-1 space-y-10">
               <ContactBlock icon={<Phone />} title="Phone support" lines={["+254 798 856 450", "+254 720 966 680", "+254 741 177 665"]} />
               <ContactBlock icon={<Mail />} title="Email inquiry" lines={["info@inaracresttechnologies.com"]} />
@@ -76,8 +76,9 @@ function SupportContent() {
             </div>
 
             {/* Email Message Interface */}
-            <form onSubmit={handleSubmit} className="lg:col-span-2 bg-gray-50 dark:bg-[#0A0A0A] rounded-3xl border border-gray-100 dark:border-gray-900 overflow-hidden flex flex-col h-[700px] shadow-xl">
-              <div className="p-6 bg-blue-600 text-white flex items-center justify-between">
+            <form onSubmit={handleSubmit} className="lg:col-span-2 bg-gray-50 dark:bg-[#0A0A0A] rounded-3xl border border-gray-100 dark:border-gray-900 overflow-hidden flex flex-col h-[700px] shadow-xl shadow-[#0C6898]/5">
+              {/* Header: Medium Ocean Blue (#0C6898) */}
+              <div className="p-6 bg-[#0C6898] text-white flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5" />
                   <span className="font-bold">Send us a message</span>
@@ -104,7 +105,8 @@ function SupportContent() {
                         placeholder="John Doe"
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                        /* Focus Ring: Vibrant Cyan (#00D2FF) */
+                        className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-[#00D2FF] transition-all"
                       />
                     </div>
                     <div className="space-y-2">
@@ -114,7 +116,7 @@ function SupportContent() {
                         placeholder="+254 7..."
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                        className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-[#00D2FF] transition-all"
                       />
                     </div>
                   </div>
@@ -126,7 +128,7 @@ function SupportContent() {
                       placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+                      className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-3 text-sm font-medium outline-none focus:ring-2 focus:ring-[#00D2FF] transition-all"
                     />
                   </div>
 
@@ -138,7 +140,7 @@ function SupportContent() {
                       rows={6}
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
-                      className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-4 text-sm font-medium outline-none focus:ring-2 focus:ring-blue-600 transition-all resize-none"
+                      className="w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-gray-800 rounded-xl px-5 py-4 text-sm font-medium outline-none focus:ring-2 focus:ring-[#00D2FF] transition-all resize-none"
                     ></textarea>
                   </div>
                 </div>
@@ -147,7 +149,8 @@ function SupportContent() {
               <div className="p-6 bg-gray-50 dark:bg-[#0A0A0A] border-t border-gray-100 dark:border-gray-900 flex justify-end">
                 <button 
                   type="submit"
-                  className="flex items-center gap-3 px-8 h-12 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-md"
+                  /* Button: Medium Ocean Blue (#0C6898), Hover: Deep Navy (#0B4C72) */
+                  className="flex items-center gap-3 px-8 h-12 bg-[#0C6898] text-white rounded-xl font-bold hover:bg-[#0B4C72] transition-all shadow-md shadow-[#0C6898]/20"
                 >
                   <span>Send Message</span>
                   <Send className="w-5 h-5" />
@@ -162,7 +165,6 @@ function SupportContent() {
   );
 }
 
-// Wrap in Suspense for Next.js useSearchParams
 export default function SupportPage() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-white dark:bg-black" />}>
@@ -174,7 +176,8 @@ export default function SupportPage() {
 function ContactBlock({ icon, title, lines }: any) {
   return (
     <div className="flex gap-6">
-      <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 rounded-2xl shrink-0 border border-blue-100 dark:border-blue-900/30">
+      {/* Icon Background: Cyan tint, Text: Ocean Blue */}
+      <div className="w-12 h-12 bg-[#00D2FF]/10 flex items-center justify-center text-[#0C6898] rounded-2xl shrink-0 border border-[#00D2FF]/20 dark:border-[#0C6898]/30">
         {icon}
       </div>
       <div>

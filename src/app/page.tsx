@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { 
   Code2, Laptop, Database, Smartphone, ShieldCheck, 
-  Cog, ArrowRight, CheckCircle2, Layers, Users, Briefcase, Award
+  Cog, ArrowRight, CheckCircle2, Layers, Users, Briefcase, Award,
+  Wifi, Globe
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -53,7 +54,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
+    <main className="min-h-screen bg-white text-black dark:bg-black dark:text-white transition-colors">
       
       {/* --- Hero Section --- */}
       <section className="relative h-[75vh] flex items-center overflow-hidden border-b border-gray-100 dark:border-gray-900">
@@ -72,7 +73,7 @@ export default function LandingPage() {
         </div>
 
         <div className="relative z-10 max-w-4xl px-8">
-          <h2 className="text-blue-600 font-bold tracking-widest text-sm mb-4 uppercase">
+          <h2 className="text-[#0C6898] font-bold tracking-widest text-sm mb-4 uppercase">
             {slides[currentSlide].label}
           </h2>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 min-h-[120px] md:min-h-[160px]">
@@ -87,7 +88,7 @@ export default function LandingPage() {
                <button 
                  key={i} 
                  onClick={() => setCurrentSlide(i)}
-                 className={`h-1 rounded-full transition-all ${i === currentSlide ? "w-12 bg-blue-600" : "w-4 bg-gray-300 dark:bg-gray-700"}`} 
+                 className={`h-1 rounded-full transition-all ${i === currentSlide ? "w-12 bg-[#00D2FF]" : "w-4 bg-gray-300 dark:bg-gray-700"}`} 
                />
              ))}
           </div>
@@ -97,7 +98,7 @@ export default function LandingPage() {
       {/* --- Partners Logo Section --- */}
       <section className="py-16 border-b border-gray-100 dark:border-gray-900 bg-gray-50/30 dark:bg-white/5">
         <div className="container mx-auto px-8">
-          <p className="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-10">
+          <p className="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-[#949494] mb-10">
             Strategic Partners & Trusted Clients
           </p>
           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-20">
@@ -105,7 +106,7 @@ export default function LandingPage() {
               <img 
                 key={partner.name} 
                 src={partner.logo} 
-                alt={partner.name} 
+                alt={partner.partner} 
                 className="h-10 md:h-14 max-w-[180px] w-auto object-contain transition-transform hover:scale-105 duration-300"
               />
             ))}
@@ -118,7 +119,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-8">
           <div className="grid lg:grid-cols-2 gap-20 items-start">
             <div>
-              <h2 className="text-blue-600 font-bold text-sm tracking-widest mb-6 uppercase">Our approach</h2>
+              <h2 className="text-[#0C6898] font-bold text-sm tracking-widest mb-6 uppercase">Our approach</h2>
               <p className="text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-8">
                 Automating the future of East African industries.
               </p>
@@ -128,14 +129,14 @@ export default function LandingPage() {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6">
                   <div className="space-y-2">
-                    <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 rounded-lg">
+                    <div className="w-10 h-10 bg-[#00D2FF]/10 flex items-center justify-center text-[#0C6898] rounded-lg">
                       <Smartphone className="w-5 h-5" />
                     </div>
                     <h4 className="font-bold text-sm">Application development</h4>
                     <p className="text-xs text-gray-500">Mobile, web, and cloud-based applications built for scale.</p>
                   </div>
                   <div className="space-y-2">
-                    <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 rounded-lg">
+                    <div className="w-10 h-10 bg-[#00D2FF]/10 flex items-center justify-center text-[#0C6898] rounded-lg">
                       <Cog className="w-5 h-5" />
                     </div>
                     <h4 className="font-bold text-sm">System lifecycle</h4>
@@ -149,8 +150,8 @@ export default function LandingPage() {
                <h3 className="text-xl font-bold mb-8">Specialized vertical solutions</h3>
                <div className="space-y-8">
                   {specializedSystems.map((item) => (
-                    <div key={item.title} className="group border-l-2 border-gray-200 dark:border-gray-800 pl-6 hover:border-blue-600 transition-all">
-                      <h4 className="text-blue-600 font-bold text-sm mb-1">{item.title}</h4>
+                    <div key={item.title} className="group border-l-2 border-gray-200 dark:border-gray-800 pl-6 hover:border-[#00D2FF] transition-all">
+                      <h4 className="text-[#0C6898] font-bold text-sm mb-1">{item.title}</h4>
                       <p className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
                     </div>
                   ))}
@@ -160,22 +161,69 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* --- NEW SECTION: Connectivity & Hosting Spotlight (Juicing the landing page) --- */}
+      <section className="py-24 bg-gray-50 dark:bg-[#050505] border-y border-gray-100 dark:border-gray-900">
+        <div className="container mx-auto px-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Internet Card */}
+            <div className="relative group overflow-hidden bg-white dark:bg-black rounded-3xl border border-gray-100 dark:border-gray-800 flex flex-col md:flex-row shadow-sm hover:shadow-xl transition-all duration-500">
+              <div className="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                <img src="/cloud-solutions.jpg" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Connectivity" />
+              </div>
+              <div className="p-8 md:w-2/3 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4 text-[#00D2FF]">
+                  <Wifi className="w-5 h-5" />
+                  <span className="text-xs font-bold uppercase tracking-widest">Internet connectivity</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-[#0C6898]">Fast & Reliable Internet</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+                  Stay connected with high-speed internet for homes and businesses, offering flexible plans from 15 Mbps up to 300 Mbps. Seamless performance starting from <strong>KSh 2,500/mo</strong>.
+                </p>
+                <Link href="/solutions/cloud-and-internet" className="text-sm font-bold flex items-center gap-2 text-[#0C6898] hover:text-[#00D2FF] transition-colors">
+                  View Plans <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Hosting Card */}
+            <div className="relative group overflow-hidden bg-white dark:bg-black rounded-3xl border border-gray-100 dark:border-gray-800 flex flex-col md:flex-row shadow-sm hover:shadow-xl transition-all duration-500">
+              <div className="md:w-1/3 h-48 md:h-auto overflow-hidden">
+                <img src="/software-dev.jpg" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Web Hosting" />
+              </div>
+              <div className="p-8 md:w-2/3 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4 text-[#00D2FF]">
+                  <Globe className="w-5 h-5" />
+                  <span className="text-xs font-bold uppercase tracking-widest">Online presence</span>
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-[#0C6898]">Domain & Web Hosting</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+                  Build your online presence with our secure domain registration and reliable web hosting solutions, designed to keep your website fast, safe, and always accessible.
+                </p>
+                <Link href="/solutions/cloud-and-internet" className="text-sm font-bold flex items-center gap-2 text-[#0C6898] hover:text-[#00D2FF] transition-colors">
+                  Explore Hosting <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* --- Stats Section --- */}
-      <section className="py-24 bg-blue-600 text-white">
+      <section className="py-24 bg-[#0B4C72] text-white">
         <div className="container mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
             <div className="space-y-2">
-              <div className="flex justify-center mb-4"><Briefcase className="w-8 h-8 opacity-60" /></div>
+              <div className="flex justify-center mb-4 text-[#00D2FF]"><Briefcase className="w-8 h-8" /></div>
               <h3 className="text-5xl md:text-6xl font-extrabold tracking-tight">50+</h3>
               <p className="text-sm font-bold uppercase tracking-[0.2em] opacity-90">Completed Projects</p>
             </div>
             <div className="space-y-2">
-              <div className="flex justify-center mb-4"><Users className="w-8 h-8 opacity-60" /></div>
+              <div className="flex justify-center mb-4 text-[#00D2FF]"><Users className="w-8 h-8" /></div>
               <h3 className="text-5xl md:text-6xl font-extrabold tracking-tight">100+</h3>
               <p className="text-sm font-bold uppercase tracking-[0.2em] opacity-90">Happy Clients</p>
             </div>
             <div className="space-y-2">
-              <div className="flex justify-center mb-4"><Award className="w-8 h-8 opacity-60" /></div>
+              <div className="flex justify-center mb-4 text-[#00D2FF]"><Award className="w-8 h-8" /></div>
               <h3 className="text-5xl md:text-6xl font-extrabold tracking-tight">25+</h3>
               <p className="text-sm font-bold uppercase tracking-[0.2em] opacity-90">Tech Experts</p>
             </div>
@@ -183,42 +231,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- Service Detail Grid --- */}
-      <section className="py-32 bg-gray-50 dark:bg-[#050505] border-y border-gray-100 dark:border-gray-900">
-        <div className="container mx-auto px-8">
-          <div className="max-w-3xl mb-16">
-            <h2 className="text-blue-600 font-bold text-sm tracking-widest mb-4 uppercase">Development items</h2>
-            <p className="text-3xl font-bold">Comprehensive digital solutions.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <FeatureBlock icon={<Layers />} title="Corporate and e-commerce" desc="Professional websites and e-commerce platforms designed to automate and grow your digital footprint." />
-            <FeatureBlock icon={<Code2 />} title="System integration" desc="Connecting digital innovation with physical infrastructure through seamless system integration and automation." />
-            <FeatureBlock icon={<Database />} title="Enterprise software" desc="Custom enterprise applications designed to optimize internal workflows and data management protocols." />
-            <FeatureBlock icon={<ShieldCheck />} title="Secure cloud apps" desc="Scalable cloud-based applications with built-in security and high-performance data handling." />
-            <FeatureBlock icon={<Laptop />} title="Technical support" desc="Ongoing maintenance contracts covering software upgrades, security patches, and logical optimizations." />
-            <FeatureBlock icon={<CheckCircle2 />} title="Digital transformation" desc="Consultative approach to moving physical business processes into modern, efficient digital environments." />
-          </div>
-        </div>
-      </section>
-
       {/* --- Final CTA --- */}
       <section className="py-32 bg-white dark:bg-black text-center px-8">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-8">Ready to automate your business operations?</h2>
-        <Link href="/support" className="inline-flex items-center gap-3 px-10 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-all text-sm group">
+        <Link href="/support" className="inline-flex items-center gap-3 px-10 py-4 bg-[#0C6898] text-white font-bold rounded-full hover:bg-[#0B4C72] transition-all text-sm group shadow-lg shadow-[#0C6898]/20">
           Consult with an engineer <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </section>
     </main>
-  );
-}
-
-function FeatureBlock({ icon, title, desc }: any) {
-  return (
-    <div className="p-8 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm hover:border-blue-600 transition-all duration-300">
-      <div className="text-blue-600 mb-6">{icon}</div>
-      <h4 className="font-bold text-lg mb-3">{title}</h4>
-      <p className="text-sm text-gray-500 dark:text-gray-400 font-medium leading-relaxed">{desc}</p>
-    </div>
   );
 }
