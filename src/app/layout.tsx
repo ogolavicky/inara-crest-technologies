@@ -11,8 +11,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Inara Crest Technologies | East Africa",
+  title: "Inara Crest Technologies",
   description: "Enterprise technology and infrastructure solutions.",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
