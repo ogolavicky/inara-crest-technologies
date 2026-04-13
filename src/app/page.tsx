@@ -106,7 +106,7 @@ export default function LandingPage() {
               <img 
                 key={partner.name} 
                 src={partner.logo} 
-                alt={partner.partner} 
+                alt={partner.name} // FIXED: Changed from partner.partner to partner.name
                 className="h-10 md:h-14 max-w-[180px] w-auto object-contain transition-transform hover:scale-105 duration-300"
               />
             ))}
@@ -161,7 +161,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- NEW SECTION: Connectivity & Hosting Spotlight (Juicing the landing page) --- */}
+      {/* --- Connectivity & Hosting Spotlight --- */}
       <section className="py-24 bg-gray-50 dark:bg-[#050505] border-y border-gray-100 dark:border-gray-900">
         <div className="container mx-auto px-8">
           <div className="grid md:grid-cols-2 gap-8">
