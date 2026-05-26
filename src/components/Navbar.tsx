@@ -54,14 +54,14 @@ export default function Navbar() {
   }, []);
 
   const solutionsLinks = [
-    { name: "Software and digital solutions", href: "/solutions/software-and-digital-solutions" },
-    { name: "Cloud and internet solutions", href: "/solutions/cloud-and-internet" },
-    { name: "It infrastructure solutions", href: "/solutions/it-infrastructure-solutions" },
-    { name: "Security and surveillance systems", href: "/solutions/security-and-surveillance-systems" },
-    { name: "Power and smart facility solutions", href: "/solutions/power-and-smart-facility-solutions" },
-    { name: "Managed services", href: "/solutions/managed-services" },
-    { name: "Research, data and analytical services", href: "/solutions/research-data-and-analytical-services" },
-    { name: "Office home and technology supply", href: "/solutions/office-home-and-technology-supply" }
+    { name: "Software and Digital Solutions", href: "/solutions/software-and-digital-solutions" },
+    { name: "Cloud and Internet Solutions", href: "/solutions/cloud-and-internet" },
+    { name: "IT Infrastructure Solutions", href: "/solutions/it-infrastructure-solutions" },
+    { name: "Security and Surveillance Systems", href: "/solutions/security-and-surveillance-systems" },
+    { name: "Power and Smart Facility Solutions", href: "/solutions/power-and-smart-facility-solutions" },
+    { name: "Managed Services", href: "/solutions/managed-services" },
+    { name: "Research, Data and Analytical services", href: "/solutions/research-data-and-analytical-services" },
+    { name: "Office Home and Technology supply", href: "/solutions/office-home-and-technology-supply" }
   ];
 
   return (
