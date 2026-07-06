@@ -5,7 +5,7 @@ import { Clock, ShieldCheck, Activity, Cog, ArrowRight, CheckCircle2, Headphones
 
 export default function ManagedServicesPage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
+    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors">
       
       {/* --- Hero Section (Sharp Image) --- */}
       <section className="relative h-[60vh] flex items-center overflow-hidden border-b border-gray-100 dark:border-gray-900">
@@ -15,11 +15,11 @@ export default function ManagedServicesPage() {
             className="w-full h-full object-cover opacity-100" 
             alt="Managed IT support" 
           />
-          {/* Subtle gradient to keep image sharp while making text readable */}
           <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/40 to-transparent dark:from-black/95 dark:via-black/40 dark:to-transparent"></div>
         </div>
         <div className="relative z-10 max-w-4xl px-8">
-          <h2 className="text-blue-600 font-bold tracking-widest text-sm mb-4 uppercase">Operational continuity</h2>
+          {/* Label: Ocean Blue (#0C6898) */}
+          <h2 className="text-[#0C6898] font-bold tracking-widest text-sm mb-4 uppercase">Operational continuity</h2>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Managed services</h1>
           <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 font-medium max-w-2xl leading-relaxed">
             Structured IT maintenance and support programs designed for enterprise-grade performance across East Africa.
@@ -32,7 +32,8 @@ export default function ManagedServicesPage() {
         <div className="container mx-auto px-8">
           <div className="grid lg:grid-cols-2 gap-20 items-start">
             <div>
-              <h2 className="text-blue-600 font-bold text-sm tracking-widest mb-6 uppercase">Maintenance framework</h2>
+              {/* Header: Ocean Blue (#0C6898) */}
+              <h2 className="text-[#0C6898] font-bold text-sm tracking-widest mb-6 uppercase">Maintenance framework</h2>
               <p className="text-3xl md:text-4xl font-bold tracking-tight leading-tight mb-8">
                 Structured IT support and maintenance contracts.
               </p>
@@ -46,11 +47,11 @@ export default function ManagedServicesPage() {
               </div>
               <div className="grid grid-cols-2 gap-4 mt-12">
                  <div className="p-6 bg-gray-50 dark:bg-[#0A0A0A] rounded-2xl border border-gray-100 dark:border-gray-900">
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Service model</p>
+                    <p className="text-xs font-bold text-[#949494] uppercase tracking-widest mb-2">Service model</p>
                     <p className="text-lg font-bold">24/7 Support</p>
                  </div>
                  <div className="p-6 bg-gray-50 dark:bg-[#0A0A0A] rounded-2xl border border-gray-100 dark:border-gray-900">
-                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Scope</p>
+                    <p className="text-xs font-bold text-[#949494] uppercase tracking-widest mb-2">Scope</p>
                     <p className="text-lg font-bold">East Africa</p>
                  </div>
               </div>
@@ -81,7 +82,8 @@ export default function ManagedServicesPage() {
       {/* --- Final CTA --- */}
       <section className="py-32 bg-white dark:bg-black text-center px-8">
         <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-8">Ready for structured IT support?</h2>
-        <Link href="/support" className="inline-flex items-center gap-3 px-10 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-700 transition-all text-sm group">
+        {/* Button: Ocean Blue (#0C6898), Hover: Deep Navy (#0B4C72) */}
+        <Link href="/support" className="inline-flex items-center gap-3 px-10 py-4 bg-[#0C6898] text-white font-bold rounded-full hover:bg-[#0B4C72] transition-all text-sm group shadow-lg shadow-[#0C6898]/20">
           Contact our technical desk <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </section>
@@ -93,11 +95,13 @@ export default function ManagedServicesPage() {
 
 function ServiceItem({ title, desc }: any) {
   return (
-    <div className="flex gap-6 items-start p-6 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm hover:border-blue-600 transition-all">
-      <CheckCircle2 className="text-blue-600 shrink-0 w-6 h-6" />
+    /* Hover border: Vibrant Cyan (#00D2FF) */
+    <div className="flex gap-6 items-start p-6 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-2xl shadow-sm hover:border-[#00D2FF] transition-all">
+      {/* Icon: Vibrant Cyan (#00D2FF) */}
+      <CheckCircle2 className="text-[#00D2FF] shrink-0 w-6 h-6" />
       <div>
         <h4 className="font-bold text-lg mb-1">{title}</h4>
-        <p className="text-gray-500 dark:text-gray-400 font-medium text-sm leading-relaxed">{desc}</p>
+        <p className="text-[#949494] dark:text-gray-400 font-medium text-sm leading-relaxed">{desc}</p>
       </div>
     </div>
   );
@@ -106,9 +110,10 @@ function ServiceItem({ title, desc }: any) {
 function ManagedTile({ icon, title, desc }: any) {
   return (
     <div className="p-8 bg-white dark:bg-black border border-gray-100 dark:border-gray-800 rounded-2xl">
-      <div className="text-blue-600 mb-6">{icon}</div>
+      {/* Icon: Ocean Blue (#0C6898) */}
+      <div className="text-[#0C6898] mb-6">{icon}</div>
       <h4 className="font-bold text-lg mb-3">{title}</h4>
-      <p className="text-gray-500 dark:text-gray-400 font-medium text-sm leading-relaxed">{desc}</p>
+      <p className="text-[#949494] dark:text-gray-400 font-medium text-sm leading-relaxed">{desc}</p>
     </div>
   );
 }

@@ -3,8 +3,9 @@ import { BarChart3, PieChart, Search, Presentation } from "lucide-react";
 
 export default function DataAnalytics() {
   return (
-    <main className="min-h-screen pb-20">
-      <section className="pt-24 pb-16 bg-blue-900 text-white text-center">
+    <main className="min-h-screen pb-20 bg-white dark:bg-black transition-colors">
+      {/* Header Section: Updated to Deep Navy Blue (#0B4C72) */}
+      <section className="pt-24 pb-16 bg-[#0B4C72] text-white text-center">
         <div className="container mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Research & Data Analytics</h1>
           <p className="max-w-2xl mx-auto opacity-90">Data-driven insights for smarter business decisions.</p>
@@ -18,9 +19,11 @@ export default function DataAnalytics() {
           { icon: <PieChart />, label: "Visualization" },
           { icon: <Presentation />, label: "BI Dashboards" }
         ].map((item, i) => (
-          <div key={i} className="p-8 text-center bg-gray-50 dark:bg-gray-900 rounded-3xl">
-            <div className="text-blue-600 mb-4 flex justify-center">{item.icon}</div>
-            <h4 className="font-bold dark:text-white">{item.label}</h4>
+          <div key={i} className="p-8 text-center bg-gray-50 dark:bg-[#0A0A0A] rounded-3xl border border-gray-100 dark:border-gray-800">
+            {/* Icon: Updated to Vibrant Cyan (#00D2FF) */}
+            <div className="text-[#00D2FF] mb-4 flex justify-center">{item.icon}</div>
+            {/* Label: Updated to Medium Ocean Blue (#0C6898) */}
+            <h4 className="font-bold text-[#0C6898] dark:text-white">{item.label}</h4>
           </div>
         ))}
       </section>
