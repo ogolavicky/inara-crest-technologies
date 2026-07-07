@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-blue: 0 48 135;
+    --brand-accent: 0 163 255;
+    --brand-green: 0 200 83;
+  }
+  
+  .dark {
+    --brand-blue: 0 163 255;
+    --brand-accent: 0 195 255;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white;
+  }
+  
+  .hero-bg {
+    background: linear-gradient(rgba(0, 48, 135, 0.85), rgba(0, 48, 135, 0.85)), 
+                url('/images/hero-bg.jpg') center/cover no-repeat;
+  }
+}
