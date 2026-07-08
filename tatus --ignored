@@ -1,0 +1,617 @@
+warning: in the working copy of 'backend/apps/accounts/admin.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/api/serializers/__init__.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/api/serializers/auth.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/api/serializers/registration.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/api/serializers/user.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/api/urls.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/api/views/__init__.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/api/views/auth.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/api/views/registration.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/apps.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/authorization/matrix.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/authorization/registry.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/forms.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/management/commands/seed_roles.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/management/commands/sync_permissions.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/managers.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/models/__init__.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/models/authorization.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/models/profile.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/models/user.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/services/__init__.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/services/authentication.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/services/registration.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/signals.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/tests.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'backend/apps/accounts/views.py', CRLF will be replaced by LF the next time Git touches it
+[1mdiff --git a/backend/apps/accounts/admin.py b/backend/apps/accounts/admin.py[m
+[1mindex a460683..4b6bb43 100644[m
+[1m--- a/backend/apps/accounts/admin.py[m
+[1m+++ b/backend/apps/accounts/admin.py[m
+[36m@@ -82,11 +82,7 @@[m [mclass UserAdmin(BaseUserAdmin):[m
+         ),[m
+         ([m
+             "System",[m
+[31m-            {[m
+[31m-                "fields": ([m
+[31m-                    "id",[m
+[31m-                )[m
+[31m-            },[m
+[32m+[m[32m            {"fields": ("id",)},[m
+         ),[m
+     )[m
+ [m
+[36m@@ -106,6 +102,7 @@[m [mclass UserAdmin(BaseUserAdmin):[m
+         ),[m
+     )[m
+ [m
+[32m+[m
+ @admin.register(Profile)[m
+ class ProfileAdmin(admin.ModelAdmin):[m
+     list_display = ([m
+[36m@@ -127,4 +124,4 @@[m [mclass ProfileAdmin(admin.ModelAdmin):[m
+         "preferred_currency",[m
+     )[m
+ [m
+[31m-    ordering = ("user__email",)[m
+\ No newline at end of file[m
+[32m+[m[32m    ordering = ("user__email",)[m
+[1mdiff --git a/backend/apps/accounts/api/serializers/__init__.py b/backend/apps/accounts/api/serializers/__init__.py[m
+[1mindex 201daf8..246bb88 100644[m
+[1m--- a/backend/apps/accounts/api/serializers/__init__.py[m
+[1m+++ b/backend/apps/accounts/api/serializers/__init__.py[m
+[36m@@ -6,4 +6,4 @@[m [m__all__ = [[m
+     "CurrentUserSerializer",[m
+     "LoginSerializer",[m
+     "RegistrationSerializer",[m
+[31m-][m
+\ No newline at end of file[m
+[32m+[m[32m][m
+[1mdiff --git a/backend/apps/accounts/api/serializers/auth.py b/backend/apps/accounts/api/serializers/auth.py[m
+[1mindex 05a358a..2e083c5 100644[m
+[1m--- a/backend/apps/accounts/api/serializers/auth.py[m
+[1m+++ b/backend/apps/accounts/api/serializers/auth.py[m
+[36m@@ -20,15 +20,11 @@[m [mclass LoginSerializer(serializers.Serializer):[m
+         )[m
+ [m
+         if not user:[m
+[31m-            raise serializers.ValidationError([m
+[31m-                "Invalid email or password."[m
+[31m-            )[m
+[32m+[m[32m            raise serializers.ValidationError("Invalid email or password.")[m
+ [m
+         if not user.is_active:[m
+[31m-            raise serializers.ValidationError([m
+[31m-                "This account has been disabled."[m
+[31m-            )[m
+[32m+[m[32m            raise serializers.ValidationError("This account has been disabled.")[m
+ [m
+         attrs["user"] = user[m
+ [m
+[31m-        return attrs[m
+\ No newline at end of file[m
+[32m+[m[32m        return attrs[m
+[1mdiff --git a/backend/apps/accounts/api/serializers/registration.py b/backend/apps/accounts/api/serializers/registration.py[m
+[1mindex 640f6bc..cbae03f 100644[m
+[1m--- a/backend/apps/accounts/api/serializers/registration.py[m
+[1m+++ b/backend/apps/accounts/api/serializers/registration.py[m
+[36m@@ -37,9 +37,7 @@[m [mclass RegistrationSerializer(serializers.Serializer):[m
+         Ensure the email is unique.[m
+         """[m
+         if User.objects.filter(email=value).exists():[m
+[31m-            raise serializers.ValidationError([m
+[31m-                "A user with this email already exists."[m
+[31m-            )[m
+[32m+[m[32m            raise serializers.ValidationError("A user with this email already exists.")[m
+ [m
+         return value[m
+ [m
+[36m@@ -49,11 +47,7 @@[m [mclass RegistrationSerializer(serializers.Serializer):[m
+         """[m
+         if attrs["password"] != attrs["confirm_password"]:[m
+             raise serializers.ValidationError([m
+[31m-                {[m
+[31m-                    "confirm_password": [[m
+[31m-                        "Passwords do not match."[m
+[31m-                    ][m
+[31m-                }[m
+[32m+[m[32m                {"confirm_password": ["Passwords do not match."]}[m
+             )[m
+ [m
+         return attrs[m
+[36m@@ -64,6 +58,4 @@[m [mclass RegistrationSerializer(serializers.Serializer):[m
+         """[m
+         validated_data.pop("confirm_password")[m
+ [m
+[31m-        return RegistrationService.register_user([m
+[31m-            **validated_data[m
+[31m-        )[m
+\ No newline at end of file[m
+[32m+[m[32m        return RegistrationService.register_user(**validated_data)[m
+[1mdiff --git a/backend/apps/accounts/api/serializers/user.py b/backend/apps/accounts/api/serializers/user.py[m
+[1mindex b0ab2b5..5f68615 100644[m
+[1m--- a/backend/apps/accounts/api/serializers/user.py[m
+[1m+++ b/backend/apps/accounts/api/serializers/user.py[m
+[36m@@ -19,4 +19,4 @@[m [mclass CurrentUserSerializer(serializers.ModelSerializer):[m
+             "is_active",[m
+             "date_joined",[m
+         )[m
+[31m-        read_only_fields = fields[m
+\ No newline at end of file[m
+[32m+[m[32m        read_only_fields = fields[m
+[1mdiff --git a/backend/apps/accounts/api/urls.py b/backend/apps/accounts/api/urls.py[m
+[1mindex e0b9025..5a01ccc 100644[m
+[1m--- a/backend/apps/accounts/api/urls.py[m
+[1m+++ b/backend/apps/accounts/api/urls.py[m
+[36m@@ -16,4 +16,4 @@[m [murlpatterns = [[m
+         RegistrationAPIView.as_view(),[m
+         name="register",[m
+     ),[m
+[31m-][m
+\ No newline at end of file[m
+[32m+[m[32m][m
+[1mdiff --git a/backend/apps/accounts/api/views/__init__.py b/backend/apps/accounts/api/views/__init__.py[m
+[1mindex dc9a686..3617bc6 100644[m
+[1m--- a/backend/apps/accounts/api/views/__init__.py[m
+[1m+++ b/backend/apps/accounts/api/views/__init__.py[m
+[36m@@ -4,4 +4,4 @@[m [mfrom .registration import RegistrationAPIView[m
+ __all__ = [[m
+     "LoginAPIView",[m
+     "RegistrationAPIView",[m
+[31m-][m
+\ No newline at end of file[m
+[32m+[m[32m][m
+[1mdiff --git a/backend/apps/accounts/api/views/auth.py b/backend/apps/accounts/api/views/auth.py[m
+[1mindex 7fc6724..4935a90 100644[m
+[1m--- a/backend/apps/accounts/api/views/auth.py[m
+[1m+++ b/backend/apps/accounts/api/views/auth.py[m
+[36m@@ -34,4 +34,4 @@[m [mclass LoginAPIView(APIView):[m
+                 "user": user_data,[m
+             },[m
+             status=status.HTTP_200_OK,[m
+[31m-        )[m
+\ No newline at end of file[m
+[32m+[m[32m        )[m
+[1mdiff --git a/backend/apps/accounts/api/views/registration.py b/backend/apps/accounts/api/views/registration.py[m
+[1mindex cd09d97..0395f1d 100644[m
+[1m--- a/backend/apps/accounts/api/views/registration.py[m
+[1m+++ b/backend/apps/accounts/api/views/registration.py[m
+[36m@@ -18,17 +18,13 @@[m [mclass RegistrationAPIView(APIView):[m
+     permission_classes = [AllowAny][m
+ [m
+     def post(self, request):[m
+[31m-        serializer = RegistrationSerializer([m
+[31m-            data=request.data[m
+[31m-        )[m
+[32m+[m[32m        serializer = RegistrationSerializer(data=request.data)[m
+ [m
+         serializer.is_valid(raise_exception=True)[m
+ [m
+         user = serializer.save()[m
+ [m
+[31m-        tokens = AuthenticationService.generate_tokens([m
+[31m-            user[m
+[31m-        )[m
+[32m+[m[32m        tokens = AuthenticationService.generate_tokens(user)[m
+ [m
+         return Response([m
+             {[m
+[36m@@ -37,4 +33,4 @@[m [mclass RegistrationAPIView(APIView):[m
+                 "user": CurrentUserSerializer(user).data,[m
+             },[m
+             status=status.HTTP_201_CREATED,[m
+[31m-        )[m
+\ No newline at end of file[m
+[32m+[m[32m        )[m
+[1mdiff --git a/backend/apps/accounts/apps.py b/backend/apps/accounts/apps.py[m
+[1mindex 17ece37..57059fe 100644[m
+[1m--- a/backend/apps/accounts/apps.py[m
+[1m+++ b/backend/apps/accounts/apps.py[m
+[36m@@ -6,4 +6,4 @@[m [mclass AccountsConfig(AppConfig):[m
+     name = "apps.accounts"[m
+ [m
+     def ready(self):[m
+[31m-        from . import signals [m
+\ No newline at end of file[m
+[32m+[m[32m        pass[m
+[1mdiff --git a/backend/apps/accounts/authorization/matrix.py b/backend/apps/accounts/authorization/matrix.py[m
+[1mindex 44982f5..00194c3 100644[m
+[1m--- a/backend/apps/accounts/authorization/matrix.py[m
+[1m+++ b/backend/apps/accounts/authorization/matrix.py[m
+[36m@@ -14,7 +14,6 @@[m [mROLE_PERMISSION_MATRIX = {[m
+         "view_invoice",[m
+         "view_ticket",[m
+     },[m
+[31m-[m
+     "Support": {[m
+         "view_domain",[m
+         "view_hosting",[m
+[36m@@ -23,14 +22,12 @@[m [mROLE_PERMISSION_MATRIX = {[m
+         "resolve_ticket",[m
+         "close_ticket",[m
+     },[m
+[31m-[m
+     "Billing": {[m
+         "view_invoice",[m
+         "create_invoice",[m
+         "process_payment",[m
+         "issue_refund",[m
+     },[m
+[31m-[m
+     "Sales": {[m
+         "view_domain",[m
+         "register_domain",[m
+[36m@@ -38,7 +35,6 @@[m [mROLE_PERMISSION_MATRIX = {[m
+         "create_hosting",[m
+         "view_invoice",[m
+     },[m
+[31m-[m
+     "Reseller": {[m
+         "view_domain",[m
+         "register_domain",[m
+[36m@@ -49,8 +45,7 @@[m [mROLE_PERMISSION_MATRIX = {[m
+         "manage_reseller",[m
+         "view_reseller_reports",[m
+     },[m
+[31m-[m
+     "Platform Administrator": {[m
+         "*",[m
+     },[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+[1mdiff --git a/backend/apps/accounts/authorization/registry.py b/backend/apps/accounts/authorization/registry.py[m
+[1mindex b93fc97..db7c726 100644[m
+[1m--- a/backend/apps/accounts/authorization/registry.py[m
+[1m+++ b/backend/apps/accounts/authorization/registry.py[m
+[36m@@ -43,4 +43,4 @@[m [mPERMISSION_REGISTRY = {[m
+         ("view_audit_logs", "Can view audit logs"),[m
+         ("manage_platform_settings", "Can manage platform settings"),[m
+     ],[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+[1mdiff --git a/backend/apps/accounts/forms.py b/backend/apps/accounts/forms.py[m
+[1mindex 8872073..b6d7f9c 100644[m
+[1m--- a/backend/apps/accounts/forms.py[m
+[1m+++ b/backend/apps/accounts/forms.py[m
+[36m@@ -3,17 +3,21 @@[m [mfrom django.contrib.auth.forms import ReadOnlyPasswordHashField[m
+ [m
+ from .models import User[m
+ [m
+[32m+[m
+ class CustomUserCreationForm(forms.ModelForm):[m
+     """[m
+     A form for creating new users. Includes all the required[m
+     fields, plus a repeated password.[m
+     """[m
+[31m-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)[m
+[31m-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)[m
+[32m+[m
+[32m+[m[32m    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)[m
+[32m+[m[32m    password2 = forms.CharField([m
+[32m+[m[32m        label="Password confirmation", widget=forms.PasswordInput[m
+[32m+[m[32m    )[m
+ [m
+     class Meta:[m
+         model = User[m
+[31m-        fields = ('email', 'first_name', 'last_name')[m
+[32m+[m[32m        fields = ("email", "first_name", "last_name")[m
+ [m
+     def clean_password2(self):[m
+         # Check that the two password entries match[m
+[36m@@ -31,20 +35,29 @@[m [mclass CustomUserCreationForm(forms.ModelForm):[m
+             user.save()[m
+         return user[m
+ [m
+[32m+[m
+ class CustomUserChangeForm(forms.ModelForm):[m
+     """[m
+     A form for updating users. Includes all the fields on[m
+     the user, but replaces the password field with admin's[m
+     password hash display field.[m
+     """[m
+[32m+[m
+     password = ReadOnlyPasswordHashField()[m
+ [m
+     class Meta:[m
+         model = User[m
+[31m-        fields = ('email', 'password', 'first_name', 'last_name', 'is_active', 'is_staff')[m
+[32m+[m[32m        fields = ([m
+[32m+[m[32m            "email",[m
+[32m+[m[32m            "password",[m
+[32m+[m[32m            "first_name",[m
+[32m+[m[32m            "last_name",[m
+[32m+[m[32m            "is_active",[m
+[32m+[m[32m            "is_staff",[m
+[32m+[m[32m        )[m
+ [m
+     def clean_password(self):[m
+         # Regardless of what the user provides, return the initial value.[m
+         # This is done here, rather than on the field, because the[m
+         # field does not have access to the initial value[m
+[31m-        return self.initial["password"][m
+\ No newline at end of file[m
+[32m+[m[32m        return self.initial["password"][m
+[1mdiff --git a/backend/apps/accounts/management/commands/seed_roles.py b/backend/apps/accounts/management/commands/seed_roles.py[m
+[1mindex 05ea4da..04d12e6 100644[m
+[1m--- a/backend/apps/accounts/management/commands/seed_roles.py[m
+[1m+++ b/backend/apps/accounts/management/commands/seed_roles.py[m
+[36m@@ -1,7 +1,6 @@[m
+ from django.contrib.auth.models import Group[m
+ from django.core.management.base import BaseCommand[m
+ [m
+[31m-[m
+ DEFAULT_GROUPS = [[m
+     "Customer",[m
+     "Support",[m
+[36m@@ -22,14 +21,10 @@[m [mclass Command(BaseCommand):[m
+             group, created = Group.objects.get_or_create(name=group_name)[m
+ [m
+             if created:[m
+[31m-                self.stdout.write([m
+[31m-                    self.style.SUCCESS(f"✓ Created group: {group_name}")[m
+[31m-                )[m
+[32m+[m[32m                self.stdout.write(self.style.SUCCESS(f"✓ Created group: {group_name}"))[m
+             else:[m
+                 self.stdout.write([m
+                     self.style.WARNING(f"• Group already exists: {group_name}")[m
+                 )[m
+ [m
+[31m-        self.stdout.write([m
+[31m-            self.style.SUCCESS("\nAuthorization groups are ready.")[m
+[31m-        )[m
+\ No newline at end of file[m
+[32m+[m[32m        self.stdout.write(self.style.SUCCESS("\nAuthorization groups are ready."))[m
+[1mdiff --git a/backend/apps/accounts/management/commands/sync_permissions.py b/backend/apps/accounts/management/commands/sync_permissions.py[m
+[1mindex c77c06e..2b1c3d2 100644[m
+[1m--- a/backend/apps/accounts/management/commands/sync_permissions.py[m
+[1m+++ b/backend/apps/accounts/management/commands/sync_permissions.py[m
+[36m@@ -13,17 +13,13 @@[m [mclass Command(BaseCommand):[m
+     def handle(self, *args, **options):[m
+         self.stdout.write(self.style.NOTICE("Synchronizing business permissions...\n"))[m
+ [m
+[31m-        content_type = ContentType.objects.get_for_model([m
+[31m-            AuthorizationPermission[m
+[31m-        )[m
+[32m+[m[32m        content_type = ContentType.objects.get_for_model(AuthorizationPermission)[m
+ [m
+         created_count = self._sync_permissions(content_type)[m
+ [m
+         permission_lookup = {[m
+             permission.codename: permission[m
+[31m-            for permission in Permission.objects.filter([m
+[31m-                content_type=content_type[m
+[31m-            )[m
+[32m+[m[32m            for permission in Permission.objects.filter(content_type=content_type)[m
+         }[m
+ [m
+         self._sync_groups(permission_lookup)[m
+[36m@@ -52,17 +48,9 @@[m [mclass Command(BaseCommand):[m
+ [m
+                 if created:[m
+                     created_count += 1[m
+[31m-                    self.stdout.write([m
+[31m-                        self.style.SUCCESS([m
+[31m-                            f"    ✓ {codename}"[m
+[31m-                        )[m
+[31m-                    )[m
+[32m+[m[32m                    self.stdout.write(self.style.SUCCESS(f"    ✓ {codename}"))[m
+                 else:[m
+[31m-                    self.stdout.write([m
+[31m-                        self.style.WARNING([m
+[31m-                            f"    • {codename}"[m
+[31m-                        )[m
+[31m-                    )[m
+[32m+[m[32m                    self.stdout.write(self.style.WARNING(f"    • {codename}"))[m
+ [m
+         return created_count[m
+ [m
+[36m@@ -104,4 +92,4 @@[m [mclass Command(BaseCommand):[m
+                 self.style.SUCCESS([m
+                     f"{group_name}: assigned {len(permissions)} permission(s)"[m
+                 )[m
+[31m-            )[m
+\ No newline at end of file[m
+[32m+[m[32m            )[m
+[1mdiff --git a/backend/apps/accounts/managers.py b/backend/apps/accounts/managers.py[m
+[1mindex 457c742..b98da4c 100644[m
+[1m--- a/backend/apps/accounts/managers.py[m
+[1m+++ b/backend/apps/accounts/managers.py[m
+[36m@@ -31,4 +31,4 @@[m [mclass UserManager(BaseUserManager):[m
+         if extra_fields.get("is_superuser") is not True:[m
+             raise ValueError("Superuser must have is_superuser=True.")[m
+ [m
+[31m-        return self._create_user(email, password, **extra_fields)[m
+\ No newline at end of file[m
+[32m+[m[32m        return self._create_user(email, password, **extra_fields)[m
+[1mdiff --git a/backend/apps/accounts/models/__init__.py b/backend/apps/accounts/models/__init__.py[m
+[1mindex 4be4f2f..9955529 100644[m
+[1m--- a/backend/apps/accounts/models/__init__.py[m
+[1m+++ b/backend/apps/accounts/models/__init__.py[m
+[36m@@ -6,4 +6,4 @@[m [m__all__ = [[m
+     "AuthorizationPermission",[m
+     "Profile",[m
+     "User",[m
+[31m-][m
+\ No newline at end of file[m
+[32m+[m[32m][m
+[1mdiff --git a/backend/apps/accounts/models/authorization.py b/backend/apps/accounts/models/authorization.py[m
+[1mindex 585e45b..0706b06 100644[m
+[1m--- a/backend/apps/accounts/models/authorization.py[m
+[1m+++ b/backend/apps/accounts/models/authorization.py[m
+[36m@@ -13,4 +13,4 @@[m [mclass AuthorizationPermission(models.Model):[m
+         default_permissions = ()[m
+ [m
+     def __str__(self):[m
+[31m-        return "Authorization Permissions"[m
+\ No newline at end of file[m
+[32m+[m[32m        return "Authorization Permissions"[m
+[1mdiff --git a/backend/apps/accounts/models/profile.py b/backend/apps/accounts/models/profile.py[m
+[1mindex 7d44f2b..ca7ccb0 100644[m
+[1m--- a/backend/apps/accounts/models/profile.py[m
+[1m+++ b/backend/apps/accounts/models/profile.py[m
+[36m@@ -73,4 +73,4 @@[m [mclass Profile(models.Model):[m
+     )[m
+ [m
+     def __str__(self):[m
+[31m-        return f"Profile for {self.user.email}"[m
+\ No newline at end of file[m
+[32m+[m[32m        return f"Profile for {self.user.email}"[m
+[1mdiff --git a/backend/apps/accounts/models/user.py b/backend/apps/accounts/models/user.py[m
+[1mindex 26a255b..95305d2 100644[m
+[1m--- a/backend/apps/accounts/models/user.py[m
+[1m+++ b/backend/apps/accounts/models/user.py[m
+[36m@@ -7,6 +7,7 @@[m [mfrom django.utils import timezone[m
+ [m
+ from ..managers import UserManager[m
+ [m
+[32m+[m
+ class User(AbstractBaseUser, PermissionsMixin):[m
+     """Custom user model using email as the unique identifier."""[m
+ [m
+[36m@@ -24,4 +25,4 @@[m [mclass User(AbstractBaseUser, PermissionsMixin):[m
+     REQUIRED_FIELDS = [][m
+ [m
+     def __str__(self):[m
+[31m-        return self.email[m
+\ No newline at end of file[m
+[32m+[m[32m        return self.email[m
+[1mdiff --git a/backend/apps/accounts/services/__init__.py b/backend/apps/accounts/services/__init__.py[m
+[1mindex 2c0738a..2049413 100644[m
+[1m--- a/backend/apps/accounts/services/__init__.py[m
+[1m+++ b/backend/apps/accounts/services/__init__.py[m
+[36m@@ -4,4 +4,4 @@[m [mfrom .registration import RegistrationService[m
+ __all__ = [[m
+     "AuthenticationService",[m
+     "RegistrationService",[m
+[31m-][m
+\ No newline at end of file[m
+[32m+[m[32m][m
+[1mdiff --git a/backend/apps/accounts/services/authentication.py b/backend/apps/accounts/services/authentication.py[m
+[1mindex 0030738..12dd393 100644[m
+[1m--- a/backend/apps/accounts/services/authentication.py[m
+[1m+++ b/backend/apps/accounts/services/authentication.py[m
+[36m@@ -18,4 +18,4 @@[m [mclass AuthenticationService:[m
+             "access": str(refresh.access_token),[m
+             "refresh": str(refresh),[m
+             "user_id": user.id,[m
+[31m-        }[m
+\ No newline at end of file[m
+[32m+[m[32m        }[m
+[1mdiff --git a/backend/apps/accounts/services/registration.py b/backend/apps/accounts/services/registration.py[m
+[1mindex ae0d15d..799343c 100644[m
+[1m--- a/backend/apps/accounts/services/registration.py[m
+[1m+++ b/backend/apps/accounts/services/registration.py[m
+[36m@@ -25,10 +25,8 @@[m [mclass RegistrationService:[m
+             last_name=last_name,[m
+         )[m
+ [m
+[31m-        customer_group = Group.objects.get([m
+[31m-            name=RegistrationService.DEFAULT_GROUP[m
+[31m-        )[m
+[32m+[m[32m        customer_group = Group.objects.get(name=RegistrationService.DEFAULT_GROUP)[m
+ [m
+         user.groups.add(customer_group)[m
+ [m
+[31m-        return user[m
+\ No newline at end of file[m
+[32m+[m[32m        return user[m
+[1mdiff --git a/backend/apps/accounts/signals.py b/backend/apps/accounts/signals.py[m
+[1mindex 732ac48..b76a9b7 100644[m
+[1m--- a/backend/apps/accounts/signals.py[m
+[1m+++ b/backend/apps/accounts/signals.py[m
+[36m@@ -2,13 +2,16 @@[m [mfrom django.db.models.signals import post_save[m
+ from django.dispatch import receiver[m
+ [m
+ from .models import Profile, User[m
+[32m+[m
+[32m+[m
+ @receiver(post_save, sender=User)[m
+ def create_user_profile(sender, instance, created, **kwargs):[m
+     """Create a profile whenever a new user is created."""[m
+     if created:[m
+         Profile.objects.create(user=instance)[m
+ [m
+[32m+[m
+ @receiver(post_save, sender=User)[m
+ def ensure_user_profile(sender, instance, **kwargs):[m
+     """Ensure every user has a profile."""[m
+[31m-    Profile.objects.get_or_create(user=instance)[m
+\ No newline at end of file[m
+[32m+[m[32m    Profile.objects.get_or_create(user=instance)[m
+[1mdiff --git a/backend/apps/accounts/tests.py b/backend/apps/accounts/tests.py[m
+[1mindex 7ce503c..4929020 100644[m
+[1m--- a/backend/apps/accounts/tests.py[m
+[1m+++ b/backend/apps/accounts/tests.py[m
+[36m@@ -1,3 +1,2 @@[m
+[31m-from django.test import TestCase[m
+ [m
+ # Create your tests here.[m
+[1mdiff --git a/backend/apps/accounts/views.py b/backend/apps/accounts/views.py[m
+[1mindex 91ea44a..b8e4ee0 100644[m
+[1m--- a/backend/apps/accounts/views.py[m
+[1m+++ b/backend/apps/accounts/views.py[m
+[36m@@ -1,3 +1,2 @@[m
+[31m-from django.shortcuts import render[m
+ [m
+ # Create your views here.[m
+[1mdiff --git a/backend/config/settings/base.py b/backend/config/settings/base.py[m
+[1mindex 7c2ef2c..2edc878 100644[m
+[1m--- a/backend/config/settings/base.py[m
+[1m+++ b/backend/config/settings/base.py[m
+[36m@@ -10,8 +10,8 @@[m [mFor the full list of settings and their values, see[m
+ https://docs.djangoproject.com/en/6.0/ref/settings/[m
+ """[m
+ [m
+[31m-from pathlib import Path[m
+ from datetime import timedelta[m
+[32m+[m[32mfrom pathlib import Path[m
+ [m
+ import environ[m
+ [m
+[36m@@ -156,25 +156,17 @@[m [mREST_FRAMEWORK = {[m
+     "DEFAULT_AUTHENTICATION_CLASSES": ([m
+         "rest_framework_simplejwt.authentication.JWTAuthentication",[m
+     ),[m
+[31m-    "DEFAULT_PERMISSION_CLASSES": ([m
+[31m-        "rest_framework.permissions.IsAuthenticated",[m
+[31m-    ),[m
+[32m+[m[32m    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),[m
+ }[m
+ [m
+ SIMPLE_JWT = {[m
+     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),[m
+     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),[m
+[31m-[m
+     "ROTATE_REFRESH_TOKENS": True,[m
+     "BLACKLIST_AFTER_ROTATION": True,[m
+[31m-[m
+     "UPDATE_LAST_LOGIN": True,[m
+[31m-[m
+     "ALGORITHM": "HS256",[m
+[31m-[m
+     "AUTH_HEADER_TYPES": ("Bearer",),[m
+[31m-[m
+     "USER_ID_FIELD": "id",[m
+[31m-[m
+     "USER_ID_CLAIM": "user_id",[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+[1mdiff --git a/backend/config/urls.py b/backend/config/urls.py[m
+[1mindex d2db9d1..8733634 100644[m
+[1m--- a/backend/config/urls.py[m
+[1m+++ b/backend/config/urls.py[m
+[36m@@ -3,9 +3,8 @@[m [mfrom django.urls import include, path[m
+ [m
+ urlpatterns = [[m
+     path("admin/", admin.site.urls),[m
+[31m-[m
+     path([m
+         "api/v1/auth/",[m
+         include("apps.accounts.api.urls"),[m
+     ),[m
+[31m-][m
+\ No newline at end of file[m
+[32m+[m[32m][m
