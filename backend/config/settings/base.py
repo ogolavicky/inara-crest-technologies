@@ -38,6 +38,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin", 
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "apps.accounts.apps.AccountsConfig",
     "rest_framework_simplejwt.token_blacklist",
+    "drf_spectacular"
 ]
 
 MIDDLEWARE = [
@@ -158,6 +160,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
@@ -171,3 +174,151 @@ SIMPLE_JWT = {
     "USER_ID_FIELD": "id",
     "USER_ID_CLAIM": "user_id",
 }
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+DEFAULT_FROM_EMAIL = "noreply@mavenhost.com"
+
+FRONTEND_URL = "http://localhost:5173"
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Maven Host API",
+    "DESCRIPTION": (
+        "REST API for Maven Host by Inara Crest Technologies.\n\n"
+        "Your Trusted Domain and Hosting Partner."
+    ),
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+
+    # Group operations by tags rather than URL paths
+    "SCHEMA_PATH_PREFIX": r"/api/v1",
+
+    # Display operation IDs
+    "SORT_OPERATIONS": True,
+
+    "CONTACT": {
+        "name": "Inara Crest Technologies",
+        "email": "support@inaracresttechnologies.com",
+    },
+
+    "LICENSE": {
+        "name": "Proprietary",
+    },
+
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "displayRequestDuration": True,
+        "persistAuthorization": True,
+    },
+
+    "COMPONENT_SPLIT_REQUEST": True,
+
+    "SECURITY": [
+    {
+        "BearerAuth": [],
+    }
+],
+
+"APPEND_COMPONENTS": {
+    "securitySchemes": {
+        "BearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT",
+        }
+    }
+},
+}
+
+JAZZMIN_SETTINGS = {
+    # ------------------------------------------------------------------
+    # Site Branding
+    # ------------------------------------------------------------------
+    "site_title": "Maven Host Administration",
+    "site_header": "Maven Host",
+    "site_brand": "Maven Host",
+    "welcome_sign": "Your Trusted Domain and Hosting Partner",
+    "copyright": "Inara Crest Technologies",
+
+    # ------------------------------------------------------------------
+    # Navigation
+    # ------------------------------------------------------------------
+    "navigation_expanded": True,
+    "show_sidebar": True,
+    "hide_apps": [],
+
+    # ------------------------------------------------------------------
+    # User Experience
+    # ------------------------------------------------------------------
+    "related_modal_active": True,
+    "show_ui_builder": True,
+
+    # ------------------------------------------------------------------
+    # Search
+    # ------------------------------------------------------------------
+    "search_model": [
+        "accounts.User",
+    # ],
+
+    # ------------------------------------------------------------------
+    # Top Menu
+    # ------------------------------------------------------------------
+    # "topmenu_links": [
+    #     {
+    #         "name": "API Documentation",
+    #         "url": "/api/docs/",
+    #         "new_window": True,
+    #     },
+    ],
+    "usermenu_links": [
+    {
+        "name": "API Documentation",
+        "url": "/api/docs/",
+        "icon": "fas fa-book",
+        "new_window": True,
+    },
+],
+    # ------------------------------------------------------------------
+    # Icons
+    # ------------------------------------------------------------------
+    "icons": {
+        "accounts.User": "fas fa-user",
+        "accounts.Profile": "fas fa-id-card",
+        "accounts.EmailVerificationToken": "fas fa-envelope-open-text",
+        "auth.Group": "fas fa-users",
+        "auth.Permission": "fas fa-key",
+    },
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",
+    "dark_mode_theme": "darkly",
+
+    "navbar": "navbar-primary",
+
+    "accent": "accent-primary",
+
+    "sidebar": "sidebar-dark-primary",
+
+    "sidebar_nav_small_text": False,
+
+    "footer_small_text": False,
+
+    "brand_small_text": False,
+}
+
+# JAZZMIN_SETTINGS.update({
+#     "site_logo": "branding/logos/maven-host-logo.png",
+#     "login_logo": "branding/logos/maven-host-logo.png",
+#     "site_logo_classes": "img-circle",
+#     "site_icon": "branding/favicons/favicon.ico",
+#     "login_logo_dark": "branding/logos/maven-host-logo-dark.png",
+# })
+
+JAZZMIN_SETTINGS.update({
+    "order_with_respect_to": [
+        "accounts",
+        "auth",
+    ],
+})

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import Profile, User
+from .models import EmailVerificationToken, Profile, User
 
 
 @admin.register(User)
@@ -125,3 +125,42 @@ class ProfileAdmin(admin.ModelAdmin):
     )
 
     ordering = ("user__email",)
+
+@admin.register(EmailVerificationToken)
+class EmailVerificationTokenAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "created_at",
+        "expires_at",
+        "used_at",
+        "is_valid",
+    )
+
+    search_fields = (
+        "user__email",
+        "token",
+    )
+
+    list_filter = (
+        "created_at",
+        "expires_at",
+        "used_at",
+    )
+
+    readonly_fields = (
+        "id",
+        "token",
+        "created_at",
+        "expires_at",
+        "used_at",
+    )
+
+    ordering = (
+        "-created_at",
+    )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False

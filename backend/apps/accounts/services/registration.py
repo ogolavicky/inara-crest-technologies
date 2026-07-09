@@ -1,8 +1,12 @@
+import logging
+
+from apps.accounts.models import User
 from django.contrib.auth.models import Group
 from django.db import transaction
 
-from apps.accounts.models import User
+from .verification import VerificationService
 
+logger = logging.getLogger(__name__)
 
 class RegistrationService:
     """
@@ -13,7 +17,13 @@ class RegistrationService:
 
     @staticmethod
     @transaction.atomic
-    def register_user(*, email, password, first_name="", last_name=""):
+    def register_user(
+        *,
+        email,
+        password,
+        first_name="",
+        last_name="",
+    ):
         """
         Register a new user and assign the default group.
         """
@@ -25,8 +35,18 @@ class RegistrationService:
             last_name=last_name,
         )
 
-        customer_group = Group.objects.get(name=RegistrationService.DEFAULT_GROUP)
+        customer_group = Group.objects.get(
+            name=RegistrationService.DEFAULT_GROUP,
+        )
 
         user.groups.add(customer_group)
+
+        try:
+            VerificationService.send_verification_email(user)
+        except Exception:
+            logger.exception(
+                "Failed to send verification email for user %s",
+                user.email,
+            )
 
         return user
