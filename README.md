@@ -18,7 +18,6 @@ Project Structure
 - Celery
 - Docker
 
-
 ## Project Structure
 
 ```text
