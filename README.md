@@ -1,6 +1,4 @@
-# Inara crest website 
-
-Project Structure
+# Inara Crest: Project Structure
 
 ## frontend stack 
 - Next.js
