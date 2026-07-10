@@ -38,7 +38,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 # Application definition
 
 INSTALLED_APPS = [
-    "jazzmin", 
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "apps.accounts.apps.AccountsConfig",
     "apps.domains",
     "rest_framework_simplejwt.token_blacklist",
-    "drf_spectacular"
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -108,18 +108,17 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
-            "django.contrib.auth.password_validation."
-            "UserAttributeSimilarityValidator"
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
         ),
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "MinimumLengthValidator"),
+        "NAME": ("django.contrib.auth.password_validation.MinimumLengthValidator"),
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "CommonPasswordValidator"),
+        "NAME": ("django.contrib.auth.password_validation.CommonPasswordValidator"),
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "NumericPasswordValidator"),
+        "NAME": ("django.contrib.auth.password_validation.NumericPasswordValidator"),
     },
 ]
 AUTH_USER_MODEL = "accounts.User"
@@ -191,45 +190,37 @@ SPECTACULAR_SETTINGS = {
     ),
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
-
     # Group operations by tags rather than URL paths
     "SCHEMA_PATH_PREFIX": r"/api/v1",
-
     # Display operation IDs
     "SORT_OPERATIONS": True,
-
     "CONTACT": {
         "name": "Inara Crest Technologies",
         "email": "support@inaracresttechnologies.com",
     },
-
     "LICENSE": {
         "name": "Proprietary",
     },
-
     "SWAGGER_UI_SETTINGS": {
         "deepLinking": True,
         "displayRequestDuration": True,
         "persistAuthorization": True,
     },
-
     "COMPONENT_SPLIT_REQUEST": True,
-
     "SECURITY": [
-    {
-        "BearerAuth": [],
-    }
-],
-
-"APPEND_COMPONENTS": {
-    "securitySchemes": {
-        "BearerAuth": {
-            "type": "http",
-            "scheme": "bearer",
-            "bearerFormat": "JWT",
+        {
+            "BearerAuth": [],
         }
-    }
-},
+    ],
+    "APPEND_COMPONENTS": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+            }
+        }
+    },
 }
 
 JAZZMIN_SETTINGS = {
@@ -241,45 +232,41 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Maven Host",
     "welcome_sign": "Your Trusted Domain and Hosting Partner",
     "copyright": "Inara Crest Technologies",
-
     # ------------------------------------------------------------------
     # Navigation
     # ------------------------------------------------------------------
     "navigation_expanded": True,
     "show_sidebar": True,
     "hide_apps": [],
-
     # ------------------------------------------------------------------
     # User Experience
     # ------------------------------------------------------------------
     "related_modal_active": True,
     "show_ui_builder": True,
-
     # ------------------------------------------------------------------
     # Search
     # ------------------------------------------------------------------
     "search_model": [
         "accounts.User",
-    # ],
-
-    # ------------------------------------------------------------------
-    # Top Menu
-    # ------------------------------------------------------------------
-    # "topmenu_links": [
-    #     {
-    #         "name": "API Documentation",
-    #         "url": "/api/docs/",
-    #         "new_window": True,
-    #     },
+        # ],
+        # ------------------------------------------------------------------
+        # Top Menu
+        # ------------------------------------------------------------------
+        # "topmenu_links": [
+        #     {
+        #         "name": "API Documentation",
+        #         "url": "/api/docs/",
+        #         "new_window": True,
+        #     },
     ],
     "usermenu_links": [
-    {
-        "name": "API Documentation",
-        "url": "/api/docs/",
-        "icon": "fas fa-book",
-        "new_window": True,
-    },
-],
+        {
+            "name": "API Documentation",
+            "url": "/api/docs/",
+            "icon": "fas fa-book",
+            "new_window": True,
+        },
+    ],
     # ------------------------------------------------------------------
     # Icons
     # ------------------------------------------------------------------
@@ -295,17 +282,11 @@ JAZZMIN_SETTINGS = {
 JAZZMIN_UI_TWEAKS = {
     "theme": "flatly",
     "dark_mode_theme": "darkly",
-
     "navbar": "navbar-primary",
-
     "accent": "accent-primary",
-
     "sidebar": "sidebar-dark-primary",
-
     "sidebar_nav_small_text": False,
-
     "footer_small_text": False,
-
     "brand_small_text": False,
 }
 
@@ -317,9 +298,41 @@ JAZZMIN_UI_TWEAKS = {
 #     "login_logo_dark": "branding/logos/maven-host-logo-dark.png",
 # })
 
-JAZZMIN_SETTINGS.update({
-    "order_with_respect_to": [
-        "accounts",
-        "auth",
-    ],
-})
+JAZZMIN_SETTINGS.update(
+    {
+        "order_with_respect_to": [
+            "accounts",
+            "auth",
+        ],
+    }
+)
+
+NAMECHEAP_SANDBOX = env.bool(
+    "NAMECHEAP_SANDBOX",
+    default=True,
+)
+
+NAMECHEAP_API_USER = env(
+    "NAMECHEAP_API_USER",
+    default="",
+)
+
+NAMECHEAP_API_KEY = env(
+    "NAMECHEAP_API_KEY",
+    default="",
+)
+
+NAMECHEAP_USERNAME = env(
+    "NAMECHEAP_USERNAME",
+    default="",
+)
+
+NAMECHEAP_CLIENT_IP = env(
+    "NAMECHEAP_CLIENT_IP",
+    default="",
+)
+
+if NAMECHEAP_SANDBOX:
+    NAMECHEAP_API_URL = "https://api.sandbox.namecheap.com/xml.response"
+else:
+    NAMECHEAP_API_URL = "https://api.namecheap.com/xml.response"

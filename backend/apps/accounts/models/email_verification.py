@@ -73,7 +73,4 @@ class EmailVerificationToken(models.Model):
 
     @property
     def is_valid(self):
-        return (
-            not self.is_used
-            and not self.is_expired
-        )
+        return not self.is_used and not self.is_expired

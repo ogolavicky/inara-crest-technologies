@@ -118,6 +118,18 @@ paths:
       responses:
         '200':
           description: No response body
+  /api/v1/domains/health/:
+    get:
+      operationId: domains_health_retrieve
+      description: Confirms that the Domains module is available.
+      summary: Domain module health check
+      tags:
+      - Domains
+      security:
+      - BearerAuth: []
+      responses:
+        '200':
+          description: No response body
 components:
   schemas:
     TokenRefresh:

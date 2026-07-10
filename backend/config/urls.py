@@ -1,7 +1,10 @@
 from django.contrib import admin
 from django.urls import include, path
-from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
-                                   SpectacularSwaggerView)
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -14,7 +17,6 @@ urlpatterns = [
         SpectacularAPIView.as_view(),
         name="schema",
     ),
-
     # Swagger UI
     path(
         "api/docs/",
@@ -23,7 +25,6 @@ urlpatterns = [
         ),
         name="swagger-ui",
     ),
-
     # ReDoc
     path(
         "api/redoc/",

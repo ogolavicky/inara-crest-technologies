@@ -1,6 +1,7 @@
-from apps.accounts.models import EmailVerificationToken, User
 from django.conf import settings
 from django.utils import timezone
+
+from apps.accounts.models import EmailVerificationToken
 
 from .email import EmailService
 
@@ -9,6 +10,7 @@ class VerificationService:
     """
     Business logic for email verification.
     """
+
     @staticmethod
     def create_token(user):
         """
@@ -28,6 +30,7 @@ class VerificationService:
         return EmailVerificationToken.objects.create(
             user=user,
         )
+
     @staticmethod
     def build_verification_url(token):
         """
@@ -40,11 +43,7 @@ class VerificationService:
             "http://localhost:5173",
         )
 
-        return (
-            f"{frontend_url}"
-            f"/verify-email/"
-            f"?token={token.token}"
-    )
+        return f"{frontend_url}/verify-email/?token={token.token}"
 
     @staticmethod
     def send_verification_email(user):
@@ -54,11 +53,7 @@ class VerificationService:
 
         token = VerificationService.create_token(user)
 
-        verification_url = (
-            VerificationService.build_verification_url(
-                token
-            )
-        )
+        verification_url = VerificationService.build_verification_url(token)
 
         subject = "Verify your email address"
 
@@ -76,7 +71,7 @@ class VerificationService:
         )
 
         return token
-    
+
     @staticmethod
     def verify_token(token_value):
         """
@@ -84,8 +79,7 @@ class VerificationService:
         """
 
         token = (
-            EmailVerificationToken.objects
-            .select_related("user")
+            EmailVerificationToken.objects.select_related("user")
             .filter(token=token_value)
             .first()
         )
@@ -94,9 +88,7 @@ class VerificationService:
             raise ValueError("Invalid verification token.")
 
         if not token.is_valid:
-            raise ValueError(
-                "Verification token has expired or has already been used."
-            )
+            raise ValueError("Verification token has expired or has already been used.")
 
         token.used_at = timezone.now()
         token.save(update_fields=["used_at"])
@@ -106,7 +98,8 @@ class VerificationService:
         user.save(update_fields=["is_email_verified"])
 
         return user
-    
+
+
 @staticmethod
 def resend_verification_email(user):
     """
@@ -114,10 +107,6 @@ def resend_verification_email(user):
     """
 
     if user.is_email_verified:
-        raise ValueError(
-            "Email address is already verified."
-        )
+        raise ValueError("Email address is already verified.")
 
-    return VerificationService.send_verification_email(
-        user
-    )
+    return VerificationService.send_verification_email(user)

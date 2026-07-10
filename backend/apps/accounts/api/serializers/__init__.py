@@ -1,5 +1,9 @@
-from .auth import (LoginSerializer, LogoutSerializer,
-                   ResendVerificationSerializer, VerifyEmailSerializer)
+from .auth import (
+    LoginSerializer,
+    LogoutSerializer,
+    ResendVerificationSerializer,
+    VerifyEmailSerializer,
+)
 from .registration import RegistrationSerializer
 from .user import CurrentUserSerializer
 

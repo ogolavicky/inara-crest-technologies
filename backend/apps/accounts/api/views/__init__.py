@@ -1,6 +1,11 @@
-from .auth import (CurrentUserAPIView, LoginAPIView, LogoutAPIView,
-                   RefreshTokenAPIView, ResendVerificationAPIView,
-                   VerifyEmailAPIView)
+from .auth import (
+    CurrentUserAPIView,
+    LoginAPIView,
+    LogoutAPIView,
+    RefreshTokenAPIView,
+    ResendVerificationAPIView,
+    VerifyEmailAPIView,
+)
 from .registration import RegistrationAPIView
 
 __all__ = [

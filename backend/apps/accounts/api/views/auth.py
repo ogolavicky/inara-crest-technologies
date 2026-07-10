@@ -1,13 +1,17 @@
-from apps.accounts.api.serializers import (CurrentUserSerializer,
-                                           LoginSerializer, LogoutSerializer,
-                                           ResendVerificationSerializer,
-                                           VerifyEmailSerializer)
-from apps.accounts.services import AuthenticationService
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenRefreshView
+
+from apps.accounts.api.serializers import (
+    CurrentUserSerializer,
+    LoginSerializer,
+    LogoutSerializer,
+    ResendVerificationSerializer,
+    VerifyEmailSerializer,
+)
+from apps.accounts.services import AuthenticationService
 
 
 class LoginAPIView(APIView):
@@ -35,6 +39,8 @@ class LoginAPIView(APIView):
             },
             status=status.HTTP_200_OK,
         )
+
+
 class RefreshTokenAPIView(TokenRefreshView):
     """
     Exchange a valid refresh token for a new access token.
@@ -44,6 +50,7 @@ class RefreshTokenAPIView(TokenRefreshView):
     """
 
     pass
+
 
 class CurrentUserAPIView(APIView):
     """
@@ -57,6 +64,7 @@ class CurrentUserAPIView(APIView):
 
         return Response(serializer.data)
 
+
 class LogoutAPIView(APIView):
     """
     Blacklist a refresh token and terminate the session.
@@ -68,10 +76,8 @@ class LogoutAPIView(APIView):
         serializer = LogoutSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        return Response(
-            status=status.HTTP_204_NO_CONTENT
-        )
-    
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class VerifyEmailAPIView(APIView):
     """
@@ -90,13 +96,10 @@ class VerifyEmailAPIView(APIView):
         )
 
         return Response(
-            {
-                "message": (
-                    "Email verified successfully."
-                )
-            },
+            {"message": ("Email verified successfully.")},
             status=status.HTTP_200_OK,
         )
+
 
 class ResendVerificationAPIView(APIView):
     """
@@ -120,10 +123,6 @@ class ResendVerificationAPIView(APIView):
         serializer.save()
 
         return Response(
-            {
-                "message": (
-                    "Verification email sent successfully."
-                )
-            },
+            {"message": ("Verification email sent successfully.")},
             status=status.HTTP_200_OK,
         )

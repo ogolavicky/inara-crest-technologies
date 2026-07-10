@@ -1,12 +1,14 @@
 import logging
 
-from apps.accounts.models import User
 from django.contrib.auth.models import Group
 from django.db import transaction
+
+from apps.accounts.models import User
 
 from .verification import VerificationService
 
 logger = logging.getLogger(__name__)
+
 
 class RegistrationService:
     """

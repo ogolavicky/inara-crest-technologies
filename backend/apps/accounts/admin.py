@@ -126,6 +126,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
     ordering = ("user__email",)
 
+
 @admin.register(EmailVerificationToken)
 class EmailVerificationTokenAdmin(admin.ModelAdmin):
     list_display = (
@@ -155,9 +156,7 @@ class EmailVerificationTokenAdmin(admin.ModelAdmin):
         "used_at",
     )
 
-    ordering = (
-        "-created_at",
-    )
+    ordering = ("-created_at",)
 
     def has_add_permission(self, request):
         return False

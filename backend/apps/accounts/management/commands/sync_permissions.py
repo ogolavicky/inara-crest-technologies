@@ -70,7 +70,6 @@ class Command(BaseCommand):
         # ------------------------------------------------------------------
         #
         for group_name, permission_codes in ROLE_PERMISSION_MATRIX.items():
-
             group, _ = Group.objects.get_or_create(name=group_name)
 
             #
@@ -95,7 +94,7 @@ class Command(BaseCommand):
 
             self.stdout.write(
                 self.style.SUCCESS(
-                    f"✓ {group.name}: " f"{group.permissions.count()} permission(s)"
+                    f"✓ {group.name}: {group.permissions.count()} permission(s)"
                 )
             )
 

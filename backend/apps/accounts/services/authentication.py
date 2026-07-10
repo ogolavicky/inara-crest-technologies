@@ -20,7 +20,7 @@ class AuthenticationService:
             "refresh": str(refresh),
             "user_id": user.id,
         }
-    
+
     @staticmethod
     def blacklist_refresh_token(refresh_token):
         """
@@ -30,6 +30,5 @@ class AuthenticationService:
         try:
             token = RefreshToken(refresh_token)
             token.blacklist()
-        except TokenError:
-            raise ValueError("Invalid or expired refresh token.")
-
+        except TokenError as exc:
+            raise ValueError("Invalid or expired refresh token.") from exc

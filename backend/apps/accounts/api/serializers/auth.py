@@ -1,6 +1,7 @@
-from apps.accounts.services import VerificationService
 from django.contrib.auth import authenticate
 from rest_framework import serializers
+
+from apps.accounts.services import VerificationService
 
 
 class LoginSerializer(serializers.Serializer):
@@ -29,7 +30,8 @@ class LoginSerializer(serializers.Serializer):
         attrs["user"] = user
 
         return attrs
-    
+
+
 class LogoutSerializer(serializers.Serializer):
     refresh = serializers.CharField()
 
@@ -41,12 +43,11 @@ class LogoutSerializer(serializers.Serializer):
         try:
             AuthenticationService.blacklist_refresh_token(refresh)
         except ValueError as exc:
-            raise serializers.ValidationError(
-                {"refresh": [str(exc)]}
-            )
+            raise serializers.ValidationError({"refresh": [str(exc)]}) from exc
 
         return attrs
-    
+
+
 class VerifyEmailSerializer(serializers.Serializer):
     token = serializers.CharField()
 
@@ -56,16 +57,13 @@ class VerifyEmailSerializer(serializers.Serializer):
         try:
             user = VerificationService.verify_token(token)
         except ValueError as exc:
-            raise serializers.ValidationError(
-                {
-                    "token": [str(exc)]
-                }
-            )
+            raise serializers.ValidationError({"token": [str(exc)]}) from exc
 
         attrs["user"] = user
 
         return attrs
-    
+
+
 class ResendVerificationSerializer(serializers.Serializer):
     """
     Serializer for requesting a new verification email.
@@ -75,14 +73,8 @@ class ResendVerificationSerializer(serializers.Serializer):
         user = self.context["request"].user
 
         try:
-            VerificationService.resend_verification_email(
-                user
-            )
+            VerificationService.resend_verification_email(user)
         except ValueError as exc:
-            raise serializers.ValidationError(
-                {
-                    "detail": str(exc)
-                }
-            )
+            raise serializers.ValidationError({"detail": str(exc)}) from exc
 
         return user

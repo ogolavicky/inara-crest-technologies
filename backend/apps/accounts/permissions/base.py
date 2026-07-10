@@ -15,6 +15,4 @@ class HasBusinessPermission(BasePermission):
         if not self.permission_codename:
             return False
 
-        return request.user.has_perm(
-            f"accounts.{self.permission_codename}"
-        )
+        return request.user.has_perm(f"accounts.{self.permission_codename}")
