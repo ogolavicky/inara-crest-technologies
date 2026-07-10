@@ -1,3 +1,5 @@
-from django.contrib import admin
+"""
+Administration configuration for the Domains application.
 
-# Register your models here.
+Models will be registered here as they are introduced.
+"""

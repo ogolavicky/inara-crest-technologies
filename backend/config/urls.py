@@ -32,4 +32,8 @@ urlpatterns = [
         ),
         name="redoc",
     ),
+    path(
+        "api/v1/domains/",
+        include("apps.domains.api.urls"),
+    ),
 ]
