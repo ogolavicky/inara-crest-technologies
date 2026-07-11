@@ -10,101 +10,127 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+import environ
 
+env = environ.Env()
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r2p(^0t^#v2z+klskf9%d(fb2gth#%khe&&eh$x%17^ja=p3z@'
+# SECRET_KEY = 'django-insecure-r2p(^0t^#v2z+klskf9%d(fb2gth#%khe&&eh$x%17^ja=p3z@'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
-
+DEBUG = env.bool("DEBUG", default=False)
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "jazzmin",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "rest_framework",
+    "apps.accounts.apps.AccountsConfig",
+    "apps.domains",
+    "rest_framework_simplejwt.token_blacklist",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": env("DB_ENGINE"),
+#         "NAME": env("DB_NAME"),
+#         "USER": env("DB_USER"),
+#         "PASSWORD": env("DB_PASSWORD"),
+#         "HOST": env("DB_HOST"),
+#         "PORT": env("DB_PORT"),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": (
+            "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": ("django.contrib.auth.password_validation.MinimumLengthValidator"),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": ("django.contrib.auth.password_validation.CommonPasswordValidator"),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": ("django.contrib.auth.password_validation.NumericPasswordValidator"),
     },
 ]
+AUTH_USER_MODEL = "accounts.User"
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = env("TIME_ZONE", default="Africa/Nairobi")
 
 USE_I18N = True
 
@@ -114,4 +140,199 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+STATIC_URL = "static/"
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+MEDIA_URL = "media/"
+
+MEDIA_ROOT = BASE_DIR / "media"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": True,
+    "ALGORITHM": "HS256",
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+}
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+DEFAULT_FROM_EMAIL = "noreply@mavenhost.com"
+
+FRONTEND_URL = "http://localhost:5173"
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Maven Host API",
+    "DESCRIPTION": (
+        "REST API for Maven Host by Inara Crest Technologies.\n\n"
+        "Your Trusted Domain and Hosting Partner."
+    ),
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # Group operations by tags rather than URL paths
+    "SCHEMA_PATH_PREFIX": r"/api/v1",
+    # Display operation IDs
+    "SORT_OPERATIONS": True,
+    "CONTACT": {
+        "name": "Inara Crest Technologies",
+        "email": "support@inaracresttechnologies.com",
+    },
+    "LICENSE": {
+        "name": "Proprietary",
+    },
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "displayRequestDuration": True,
+        "persistAuthorization": True,
+    },
+    "COMPONENT_SPLIT_REQUEST": True,
+    "SECURITY": [
+        {
+            "BearerAuth": [],
+        }
+    ],
+    "APPEND_COMPONENTS": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+            }
+        }
+    },
+}
+
+JAZZMIN_SETTINGS = {
+    # ------------------------------------------------------------------
+    # Site Branding
+    # ------------------------------------------------------------------
+    "site_title": "Maven Host Administration",
+    "site_header": "Maven Host",
+    "site_brand": "Maven Host",
+    "welcome_sign": "Your Trusted Domain and Hosting Partner",
+    "copyright": "Inara Crest Technologies",
+    # ------------------------------------------------------------------
+    # Navigation
+    # ------------------------------------------------------------------
+    "navigation_expanded": True,
+    "show_sidebar": True,
+    "hide_apps": [],
+    # ------------------------------------------------------------------
+    # User Experience
+    # ------------------------------------------------------------------
+    "related_modal_active": True,
+    "show_ui_builder": True,
+    # ------------------------------------------------------------------
+    # Search
+    # ------------------------------------------------------------------
+    "search_model": [
+        "accounts.User",
+        # ],
+        # ------------------------------------------------------------------
+        # Top Menu
+        # ------------------------------------------------------------------
+        # "topmenu_links": [
+        #     {
+        #         "name": "API Documentation",
+        #         "url": "/api/docs/",
+        #         "new_window": True,
+        #     },
+    ],
+    "usermenu_links": [
+        {
+            "name": "API Documentation",
+            "url": "/api/docs/",
+            "icon": "fas fa-book",
+            "new_window": True,
+        },
+    ],
+    # ------------------------------------------------------------------
+    # Icons
+    # ------------------------------------------------------------------
+    "icons": {
+        "accounts.User": "fas fa-user",
+        "accounts.Profile": "fas fa-id-card",
+        "accounts.EmailVerificationToken": "fas fa-envelope-open-text",
+        "auth.Group": "fas fa-users",
+        "auth.Permission": "fas fa-key",
+    },
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",
+    "dark_mode_theme": "darkly",
+    "navbar": "navbar-primary",
+    "accent": "accent-primary",
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "footer_small_text": False,
+    "brand_small_text": False,
+}
+
+# JAZZMIN_SETTINGS.update({
+#     "site_logo": "branding/logos/maven-host-logo.png",
+#     "login_logo": "branding/logos/maven-host-logo.png",
+#     "site_logo_classes": "img-circle",
+#     "site_icon": "branding/favicons/favicon.ico",
+#     "login_logo_dark": "branding/logos/maven-host-logo-dark.png",
+# })
+
+JAZZMIN_SETTINGS.update(
+    {
+        "order_with_respect_to": [
+            "accounts",
+            "auth",
+        ],
+    }
+)
+
+NAMECHEAP_SANDBOX = env.bool(
+    "NAMECHEAP_SANDBOX",
+    default=True,
+)
+
+NAMECHEAP_API_USER = env(
+    "NAMECHEAP_API_USER",
+    default="",
+)
+
+NAMECHEAP_API_KEY = env(
+    "NAMECHEAP_API_KEY",
+    default="",
+)
+
+NAMECHEAP_USERNAME = env(
+    "NAMECHEAP_USERNAME",
+    default="",
+)
+
+NAMECHEAP_CLIENT_IP = env(
+    "NAMECHEAP_CLIENT_IP",
+    default="",
+)
+
+if NAMECHEAP_SANDBOX:
+    NAMECHEAP_API_URL = "https://api.sandbox.namecheap.com/xml.response"
+else:
+    NAMECHEAP_API_URL = "https://api.namecheap.com/xml.response"
