@@ -7,11 +7,12 @@ class BaseRegistrarProvider(ABC):
     """
 
     @abstractmethod
-    def check_domain(self, domain_name: str):
+    def check_domains(self, domains: list[str]):
         """
         Check domain availability.
         """
-        raise NotImplementedError
+        # DomainList=",".join(domains)
+        return self.client.check_domains(domains)
 
     @abstractmethod
     def register_domain(self, domain_name: str):

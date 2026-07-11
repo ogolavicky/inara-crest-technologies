@@ -2,6 +2,8 @@ import requests
 from defusedxml import ElementTree
 from django.conf import settings
 
+from apps.domains.dto import DomainAvailabilityResult
+
 from .exceptions import NamecheapAPIError
 
 
@@ -84,3 +86,22 @@ class NamecheapClient:
         """
 
         return self.request("namecheap.users.getBalances")
+
+    def check_domain(self, domain_name: str):
+        """
+        Check domain availability.
+        """
+
+        root = self.request(
+            "namecheap.domains.check",
+            DomainList=domain_name,
+        )
+
+        result = root.find(".//DomainCheckResult")
+
+        return DomainAvailabilityResult(
+            domain=result.attrib["Domain"],
+            available=result.attrib["Available"].lower() == "true",
+            premium=result.attrib.get("IsPremiumName", "false").lower() == "true",
+            registrar="namecheap",
+        )

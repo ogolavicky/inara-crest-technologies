@@ -12,7 +12,7 @@ class NamecheapProvider(BaseRegistrarProvider):
         self.client = NamecheapClient()
 
     def check_domain(self, domain_name: str):
-        raise NotImplementedError
+        return self.client.check_domain(domain_name)
 
     def register_domain(self, domain_name: str):
         raise NotImplementedError
