@@ -1,5 +1,5 @@
-from .domain_search import DomainSearchService
+from .domain_search import DomainLookupService
 
 __all__ = [
-    "DomainSearchService",
+    "DomainLookupService",
 ]

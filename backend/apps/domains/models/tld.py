@@ -2,14 +2,9 @@ from django.db import models
 
 
 class TLD(models.Model):
-    """
-    Represents a supported Top-Level Domain.
-    """
-
     extension = models.CharField(
         max_length=20,
         unique=True,
-        help_text="Example: com, org, net, co.ke",
     )
 
     display_name = models.CharField(
@@ -29,6 +24,14 @@ class TLD(models.Model):
         default=False,
     )
 
+    registration_order = models.PositiveIntegerField(
+        default=0,
+    )
+
+    is_featured = models.BooleanField(
+        default=False,
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True,
     )
@@ -38,9 +41,7 @@ class TLD(models.Model):
     )
 
     class Meta:
-        ordering = ["extension"]
-        verbose_name = "Top-Level Domain"
-        verbose_name_plural = "Top-Level Domains"
-
-    def __str__(self):
-        return f".{self.extension}"
+        ordering = (
+            "registration_order",
+            "extension",
+        )

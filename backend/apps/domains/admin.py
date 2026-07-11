@@ -6,7 +6,12 @@ Models will be registered here as they are introduced.
 
 from django.contrib import admin
 
-from .models import TLD, Domain, Registrar
+from .models import (
+    TLD,
+    Domain,
+    DomainPrice,
+    Registrar,
+)
 
 
 @admin.register(Registrar)
@@ -79,3 +84,37 @@ class TLDAdmin(admin.ModelAdmin):
     )
 
     ordering = ("extension",)
+
+    @admin.register(DomainPrice)
+    class DomainPriceAdmin(admin.ModelAdmin):
+        list_display = (
+            "tld",
+            "registrar",
+            "price_type",
+            "years",
+            "currency",
+            "price",
+            "updated_at",
+        )
+
+        list_filter = (
+            "registrar",
+            "price_type",
+            "currency",
+        )
+
+        search_fields = (
+            "tld__extension",
+            "registrar__name",
+        )
+
+        autocomplete_fields = (
+            "registrar",
+            "tld",
+        )
+
+        ordering = (
+            "tld__extension",
+            "price_type",
+            "years",
+        )

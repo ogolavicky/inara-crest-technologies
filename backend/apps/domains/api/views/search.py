@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from apps.domains.api.serializers import DomainSearchSerializer
 from apps.domains.clients import NamecheapAPIError
-from apps.domains.services import DomainSearchService
+from apps.domains.services import DomainLookupService
 
 
 @extend_schema(
@@ -34,7 +34,7 @@ class DomainSearchAPIView(APIView):
         serializer.is_valid(raise_exception=True)
 
         try:
-            result = DomainSearchService.search(serializer.validated_data["domain"])
+            result = DomainLookupService.discover(serializer.validated_data["domain"])
         except NamecheapAPIError as exc:
             return Response(
                 {
